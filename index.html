@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Prototype globe to 2D</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+		<!-- bower components -->
+		<script src="bower_components/threejs/build/three.js"></script>
+		<script src="bower_components/pipeline/process-step.js"></script>
+		<script src="bower_components/pipeline/render-step.js"></script>
+		<script src="bower_components/pipeline/shader-step.js"></script>
+		<script src="bower_components/pipeline/render-pipeline.js"></script>
+		<script src="controls.js"></script>
+
+		<!-- own code -->
+		<script src="demo.js"></script>
+		<script src="export.js"></script>
+
+		<!-- stylesheet -->
+		<link rel="stylesheet" type="text/css" href="style.css"></link>
+
+		<!-- shader - simple vertex shader -->
+		<script id="copyVertex" type="x-shader/x-vertex">
+
+			varying vec2 vUv;
+
+			void main() {
+
+				vUv = uv;
+				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+
+			}
+
+		</script>
+
+		<!-- shader - copy/save to screen -->
+		<script id="copyFragment" type="x-shader/x-vertex">
+
+			uniform sampler2D texData;
+			varying vec2 vUv;
+
+			void main() {
+
+				vec4 texel = texture2D( texData, vUv );
+				gl_FragColor = 1.0 * texel;
+
+			}
+
+		</script>
+
+	</head>
+
+	<body>
+
+		<div id="canvas"></div>
+
+	</body>
+
+</html>
