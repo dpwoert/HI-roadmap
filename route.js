@@ -1,14 +1,14 @@
 var lineMaterial = new THREE.MeshLineMaterial({
 	color: new THREE.Color(1,0,0),
-	lineWidth: 0.7,
+	lineWidth: 0.2,
 	opacity: 1,
 	transparent: true,
 	resolution: new THREE.Vector2( window.innerWidth, window.innerHeight )
 });
 
-var bullitMaterial = new THREE.MeshPhongMaterial({
+var bullitMaterial = new THREE.MeshBasicMaterial({
 	color: 0xff0000,
-	shading: THREE.FlatShading
+	// shading: THREE.FlatShading
 });
 
 window.Route = function(world){
@@ -33,7 +33,7 @@ window.Route = function(world){
 	this.add = function(lat, lon, curveHeight){
 
 		var previous = getPrevious();
-		var point = tools.degreeToVec3(lon, lat, 0, world.radius);
+		var point = tools.degreeToVec3(lon, lat, 0.3, world.radius);
 		points.push(point);
 
 		//curve to somewhere
@@ -78,20 +78,12 @@ window.Route = function(world){
 
 			var material = bullitMaterial;
 
-			if(key == 1){
-				material = bullitMaterial.clone();
-				material.color = new THREE.Color(0,0,1);
-			}
-			if(key == 2){
-				material = bullitMaterial.clone();
-				material.color = new THREE.Color(1,1,0);
-			}
-			if(key == 3){
-				material = bullitMaterial.clone();
-				material.color = new THREE.Color(0,1,0);
-			}
+			// if(key == 1){
+			// 	material = bullitMaterial.clone();
+			// 	material.color = new THREE.Color(0,0,1);
+			// }
 
-			var geometry = new THREE.SphereGeometry( 1, 12, 12 );
+			var geometry = new THREE.SphereGeometry( 0.2, 12, 12 );
 			var mesh = new THREE.Mesh( geometry, material );
 
 			//set position
