@@ -33,7 +33,7 @@ window.Route = function(world){
 	this.add = function(lat, lon, curveHeight){
 
 		var previous = getPrevious();
-		var point = tools.degreeToVec3(lon, lat, 0.3, world.radius);
+		var point = tools.degreeToVec3(lat, lon, 0.3, world.radius);
 		points.push(point);
 
 		//curve to somewhere
@@ -78,10 +78,10 @@ window.Route = function(world){
 
 			var material = bullitMaterial;
 
-			// if(key == 1){
-			// 	material = bullitMaterial.clone();
-			// 	material.color = new THREE.Color(0,0,1);
-			// }
+			if(key == 0){
+				material = bullitMaterial.clone();
+				material.color = new THREE.Color(0,0,1);
+			}
 
 			var geometry = new THREE.SphereGeometry( 0.2, 12, 12 );
 			var mesh = new THREE.Mesh( geometry, material );

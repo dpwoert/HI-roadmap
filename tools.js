@@ -2,8 +2,10 @@ window.tools = {
 
 	degreeToVec3: function(lat, lon, alt, rad){
 
-		lat = THREE.Math.degToRad(-lat);
-		lon = THREE.Math.degToRad(lon);
+		console.log(lat, lon);
+
+		lat = THREE.Math.degToRad(lat);
+		lon = THREE.Math.degToRad(0-lon);
 
 		// rad = np.float64(6378137.0)        # Radius of the Earth (in meters)
 		var f = 1.0/298.257223563;  //Flattening factor WGS84 Model
@@ -18,7 +20,9 @@ window.tools = {
 		var y = (rad * C + alt)*cosLat * Math.sin(lon);
 		var z = (rad * S + alt)*sinLat;
 
-		return new THREE.Vector3(x, y, z);
+		console.log(x,z,y)
+
+		return new THREE.Vector3(x, z, y);
 	},
 
 	vec3ToDeg: function(vec3, radius){

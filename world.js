@@ -20,7 +20,8 @@ window.World = function(){
 
 	//rotated group
 	this.rotated = new THREE.Object3D();
-	this.rotated.rotateY(Math.PI);
+	this.rotated.rotateY(-Math.PI);
+	// this.rotated.rotateX(-Math.PI/2);
 	this.scene.add(this.rotated)
 
 	//render manager to add abbility to play and add FX
@@ -46,11 +47,8 @@ window.World = function(){
 		var geometry = new THREE.IcosahedronGeometry( this.radius, cells );
 		// var geometry = new THREE.SphereGeometry( radius, cells, cells );
 		var material = new THREE.MeshPhongMaterial({
-			// color: 0xff0000,
 			shading: THREE.FlatShading,
 			vertexColors: THREE.VertexColors,
-			// opacity: 0.7,
-			// transparent: true,
 		});
 		var mesh = new THREE.Mesh( geometry, material );
 
@@ -65,7 +63,7 @@ window.World = function(){
 		var center = new THREE.Vector3(0,0,0);
 		geometry.vertices.forEach(function(vertex){
 			var offset = Math.random();
-			vertex = vertex.lerp(center, -offset/25);
+			// vertex = vertex.lerp(center, -offset/25);
 		});
 
 		//add test route
@@ -77,6 +75,27 @@ window.World = function(){
 			.add(30.044420, 31.235712, 4)
 			.add(19.075984, 72.877656, 4)
 			.add(-33.867487, 151.20699, 8)
+			.add(40.712784, -74.005941, 30)
+
+			// .add(-90, 0)
+			// .add(-60, 0, 8)
+			// .add(-30, 0, 8)
+			// .add(0, 0, 8)
+			// .add(30, 0, 2)
+			// .add(60, 0, 8)
+			// .add(90, 0, 8)
+			// .add(-90, 180)
+			// .add(-60, 180, 8)
+			// .add(-30, 180, 8)
+			// .add(0, 180, 8)
+			// .add(30, 180, 2)
+			// .add(60, 180, 8)
+			// .add(90, 180, 8)
+			//
+			// .add(0, 90, 8)
+			// .add(-45, 80, 8)
+			// .add(-60, 80, 8)
+			// .add(-90, 80, 8)
 
 			.build();
 
