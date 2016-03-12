@@ -63,6 +63,12 @@ options.previous = function(){
 
 options.change = function(){
 	points[pointer][options.map] = options.value;
+
+	//clear old data
+	points[pointer].a = undefined;
+	points[pointer].b = undefined;
+	points[pointer].c = undefined;
+
 };
 
 options.load = function(){

@@ -42,7 +42,7 @@ window.World = function(){
 
 	//get colors
 	var loader = new THREE.XHRLoader();
-	loader.load('../map.json', function (res) {
+	loader.load('data/map.json', function (res) {
 
 		var geometry = new THREE.IcosahedronGeometry( this.radius, cells );
 		// var geometry = new THREE.SphereGeometry( radius, cells, cells );
@@ -80,25 +80,53 @@ window.World = function(){
 
 	}.bind(this));
 
-	var geometry = new THREE.IcosahedronGeometry( this.radius + 0.4, cells );
-	var material = new THREE.MeshPhongMaterial({
-		shading: THREE.FlatShading,
-		vertexColors: THREE.VertexColors,
-		transparent: true,
-		opacity: 0.7
-	});
-	var mesh = new THREE.Mesh( geometry, material );
+	var loader2 = new THREE.XHRLoader();
+	loader2.load('data/travel-times.json', function (res) {
 
-	this.scene.add(mesh);
-	this.renderManager.pipe('random', function(){
+		var geometry = new THREE.IcosahedronGeometry( this.radius + 0.4, cells );
+		var material = new THREE.MeshPhongMaterial({
+			shading: THREE.FlatShading,
+			vertexColors: THREE.VertexColors,
+			transparent: true,
+			opacity: 0.7
+		});
 
-			geometry.faces.forEach(function(face, i){
-				geometry.faces[i].color.setRGB(Math.random(), Math.random(), Math.random());
-			});
+		var faces = JSON.parse( res );
+		console.log(faces);
+		faces.forEach(function(face, i){
 
-			geometry.colorsNeedUpdate = true;
+			var color = new THREE.Color(255,255,255);
 
-	})
+			switch(face['1881']){
+
+				case 'yellow':
+					color = new THREE.Color(1.0, 0.99, 0.0);
+				break;
+
+				case 'pink':
+					color = new THREE.Color(252, 14, 214);
+				break;
+
+			}
+
+			geometry.faces[i].color.copy(color);
+		});
+
+		geometry.colorsNeedUpdate = true;
+		var mesh = new THREE.Mesh( geometry, material );
+		this.scene.add(mesh);
+
+	}.bind(this));
+
+	// this.renderManager.pipe('random', function(){
+	//
+	// 		geometry.faces.forEach(function(face, i){
+	// 			geometry.faces[i].color.setRGB(Math.random(), Math.random(), Math.random());
+	// 		});
+	//
+	// 		geometry.colorsNeedUpdate = true;
+	//
+	// })
 
 	//add controls
 	var controls = new THREE.OrbitControls( this.camera, renderer.domElement );
