@@ -80,10 +80,25 @@ window.World = function(){
 
 	}.bind(this));
 
-	// geometry.faces.forEach(function(face){
-	// 	var color = Math.random() > 0.5 ? 1 : 0;
-	// 	face.color = new THREE.Color(color, color, color);
-	// });
+	var geometry = new THREE.IcosahedronGeometry( this.radius + 0.4, cells );
+	var material = new THREE.MeshPhongMaterial({
+		shading: THREE.FlatShading,
+		vertexColors: THREE.VertexColors,
+		transparent: true,
+		opacity: 0.7
+	});
+	var mesh = new THREE.Mesh( geometry, material );
+
+	this.scene.add(mesh);
+	this.renderManager.pipe('random', function(){
+
+			geometry.faces.forEach(function(face, i){
+				geometry.faces[i].color.setRGB(Math.random(), Math.random(), Math.random());
+			});
+
+			geometry.colorsNeedUpdate = true;
+
+	})
 
 	//add controls
 	var controls = new THREE.OrbitControls( this.camera, renderer.domElement );
