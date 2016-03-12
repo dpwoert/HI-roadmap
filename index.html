@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
 		<!-- bower components -->
+		<script src="bower_components/d3/d3.js"></script>
 		<script src="bower_components/threejs/build/three.js"></script>
 		<script src="bower_components/pipeline/process-step.js"></script>
 		<script src="bower_components/pipeline/render-step.js"></script>
@@ -17,9 +18,18 @@
 		<!-- own code -->
 		<script src="tools.js"></script>
 		<script src="route.js"></script>
+		<script src="timeline.js"></script>
+		<script src="timeline-event.js"></script>
 		<script src="world.js"></script>
 		<script src="demo.js"></script>
 		<script src="export.js"></script>
+
+		<!-- timeline events -->
+		<script src="timeline/_timeline.js"></script>
+		<script src="timeline/start.js"></script>
+		<script src="timeline/end.js"></script>
+		<script src="timeline/immigration.js"></script>
+		<script src="timeline/atlantic-flight.js"></script>
 
 		<!-- stylesheet -->
 		<link rel="stylesheet" type="text/css" href="style.css"></link>
@@ -57,7 +67,19 @@
 
 	<body>
 
+		<!-- webgl part -->
 		<div id="canvas"></div>
+
+		<!-- sidebar -->
+		<div class="sidebar">
+			<div class="sidebar__image"></div>
+			<div class="sidebar__content"></div>
+		</div>
+
+		<!-- timeline  -->
+		<div class="timeline__wrapper">
+			<svg class="timeline"></svg>
+		</div>
 
 	</body>
 

@@ -2,8 +2,6 @@ window.tools = {
 
 	degreeToVec3: function(lat, lon, alt, rad){
 
-		console.log(lat, lon);
-
 		lat = THREE.Math.degToRad(lat);
 		lon = THREE.Math.degToRad(0-lon);
 
@@ -19,8 +17,6 @@ window.tools = {
 		var x = (rad * C + alt)*cosLat * Math.cos(lon);
 		var y = (rad * C + alt)*cosLat * Math.sin(lon);
 		var z = (rad * S + alt)*sinLat;
-
-		console.log(x,z,y)
 
 		return new THREE.Vector3(x, z, y);
 	},

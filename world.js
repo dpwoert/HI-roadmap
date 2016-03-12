@@ -1,7 +1,8 @@
 window.World = function(){
 
+	var canvas = document.getElementById('canvas');
 	var dpr = window.devicePixelRatio = 1;
-	var width = window.innerWidth * dpr;
+	var width = canvas.offsetWidth * dpr;
 	var height = window.innerHeight * dpr;
 
 	var renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -9,12 +10,11 @@ window.World = function(){
 	renderer.setSize(width, height);
 
 	//add DOM element
-	var canvas = document.getElementById('canvas');
 	canvas.appendChild( renderer.domElement );
 
 	//setup scene
 	this.scene = new THREE.Scene();
-	this.camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 1, 1000 );
+	this.camera = new THREE.PerspectiveCamera( 30, width / height, 1, 1000 );
 	this.camera.position.set(0,0,-100);
 	this.camera.lookAt(new THREE.Vector3(0,0,0));
 
@@ -63,41 +63,8 @@ window.World = function(){
 		var center = new THREE.Vector3(0,0,0);
 		geometry.vertices.forEach(function(vertex){
 			var offset = Math.random();
-			// vertex = vertex.lerp(center, -offset/25);
+			vertex = vertex.lerp(center, -offset/25);
 		});
-
-		//add test route
-		var route = new Route(this);
-		route
-
-			//ring
-			.add(51.507351, -0.127758)
-			.add(30.044420, 31.235712, 4)
-			.add(19.075984, 72.877656, 4)
-			.add(-33.867487, 151.20699, 8)
-			.add(40.712784, -74.005941, 30)
-
-			// .add(-90, 0)
-			// .add(-60, 0, 8)
-			// .add(-30, 0, 8)
-			// .add(0, 0, 8)
-			// .add(30, 0, 2)
-			// .add(60, 0, 8)
-			// .add(90, 0, 8)
-			// .add(-90, 180)
-			// .add(-60, 180, 8)
-			// .add(-30, 180, 8)
-			// .add(0, 180, 8)
-			// .add(30, 180, 2)
-			// .add(60, 180, 8)
-			// .add(90, 180, 8)
-			//
-			// .add(0, 90, 8)
-			// .add(-45, 80, 8)
-			// .add(-60, 80, 8)
-			// .add(-90, 80, 8)
-
-			.build();
 
 		this.scene.add(mesh);
 
@@ -119,22 +86,30 @@ window.World = function(){
 	// });
 
 	//add controls
-	controls = new THREE.OrbitControls( this.camera, renderer.domElement );
+	var controls = new THREE.OrbitControls( this.camera, renderer.domElement );
 	controls.enableDamping = true;
 	controls.dampingFactor = 0.2;
 	controls.rotateSpeed = 0.2;
-	// controls.autoRotate = true;
+	controls.autoRotate = true;
 	controls.autoRotateSpeed = -0.1;
 	// controls.target.copy(center);
 
+	//add events
+	timeline
+		.world(this)
+		.build();
+
 	// make pipeline
 	this.renderManager
+
 		// .pipe('main', renderPass)
 		// .pipe('toScreen', copy)
+
 		.pipe('render', function(){
 			renderer.render(this.scene, this.camera);
 		}.bind(this))
 		.pipe('controls', controls.update.bind(controls))
+		.pipe('timeline', timeline.tick.bind(timeline))
 		.start();
 
 	// window.scene = scene;

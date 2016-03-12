@@ -78,10 +78,10 @@ window.Route = function(world){
 
 			var material = bullitMaterial;
 
-			if(key == 0){
-				material = bullitMaterial.clone();
-				material.color = new THREE.Color(0,0,1);
-			}
+			// if(key == 0){
+			// 	material = bullitMaterial.clone();
+			// 	material.color = new THREE.Color(0,0,1);
+			// }
 
 			var geometry = new THREE.SphereGeometry( 0.2, 12, 12 );
 			var mesh = new THREE.Mesh( geometry, material );
@@ -111,7 +111,17 @@ window.Route = function(world){
 	};
 
 	this.remove = function(){
+		meshes.forEach(function(mesh){
+			world.rotated.remove(mesh);
+			mesh.geometry.dispose();
+		});
 
+		points = undefined;
+		curves = undefined;
+		meshes = undefined;
+
+		//chainable
+		return this;
 	};
 
 };
