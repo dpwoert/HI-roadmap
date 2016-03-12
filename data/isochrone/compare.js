@@ -34,7 +34,7 @@ var pointTo = function(lat, lon){
 		right.removeLayer(markerRight);
 	}
 
-	var geo = new L.LatLng(lat, lon);
+	var geo = new L.LatLng(lon, lat);
 	markerLeft = L.marker(geo);
 	markerRight = L.marker(geo);
 	markerLeft.addTo(left);
@@ -53,10 +53,18 @@ options.setPoint = function(i){
 };
 
 options.next = function(){
+
+	//save before
+	options.change();
+
 	var next = pointer + 1 === points.length ? 0 : (pointer + 1);
 	options.setPoint(pointer + 1);
 }
 options.previous = function(){
+
+	//save before
+	options.change();
+
 	var previous = pointer === 0 ? points.length - 1 : pointer - 1;
 	options.setPoint(previous);
 }

@@ -104,7 +104,11 @@ window.World = function(){
 				break;
 
 				case 'pink':
-					color = new THREE.Color(252, 14, 214);
+					color = new THREE.Color(1.0, 0.04, 0.99);
+				break;
+
+				case 'blue':
+					color = new THREE.Color(0, 0, 1);
 				break;
 
 			}
