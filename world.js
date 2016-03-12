@@ -42,7 +42,7 @@ window.World = function(){
 
 	//get colors
 	var loader = new THREE.XHRLoader();
-	loader.load('data/map.json', function (res) {
+	loader.load('../map.json', function (res) {
 
 		var geometry = new THREE.IcosahedronGeometry( this.radius, cells );
 		// var geometry = new THREE.SphereGeometry( radius, cells, cells );

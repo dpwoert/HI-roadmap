@@ -32,6 +32,7 @@ points.forEach(function(point){
 	});
 
 	point.inside = inside;
+	point.center = center.geometry.coordinates;
 	// point.inside = center.geometry.coordinates[0] > 0;
 	// console.log('inside', inside);
 
