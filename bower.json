@@ -15,6 +15,7 @@
   "dependencies": {
     "threejs": "r74",
     "d3": "~3.5.16",
-    "leaflet": "~0.7.7"
+    "leaflet": "~0.7.7",
+    "dat.gui": "*"
   }
 }
