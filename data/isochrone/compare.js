@@ -7,6 +7,26 @@ var options = {
 var points = [];
 var pointer = 0;
 
+var saveFile = function(data, filename){
+
+	if(!filename) {
+		filename = 'data.json';
+	}
+
+	data = JSON.stringify(data);
+
+	var blob = new Blob([data], {type: 'application/json'}),
+	e    = document.createEvent('MouseEvents'),
+	a    = document.createElement('a');
+
+	a.download = filename;
+	a.href = window.URL.createObjectURL(blob);
+	a.dataset.downloadurl =  ['application/json', a.download, a.href].join(':');
+	e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+	a.dispatchEvent(e);
+
+};
+
 var pointTo = function(lat, lon){
 
 	if(markerLeft){
@@ -20,8 +40,8 @@ var pointTo = function(lat, lon){
 	markerLeft.addTo(left);
 	markerRight.addTo(right);
 
-	left.setView(geo, 4);
-	right.setView(geo, 4);
+	left.panTo(geo);
+	right.panTo(geo);
 
 };
 
@@ -42,7 +62,7 @@ options.previous = function(){
 }
 
 options.change = function(){
-	points[pointer].legend = options.value;
+	points[pointer][options.map] = options.value;
 };
 
 options.load = function(){
@@ -63,7 +83,7 @@ options.load = function(){
 			var url = '../../data/maps/Isochronic_Passage_Chart_Francis_Galton_1881.jpg';
 			image = L.imageOverlay(url, imageBounds).addTo(left);
 
-			options.legends = ['green', 'yellow', 'pink', 'blue', 'brown'];
+			options.legends = ['choose','green', 'yellow', 'pink', 'blue', 'brown'];
 
 			var loader = new THREE.XHRLoader();
 			loader.load('../map.json', function (res) {
@@ -89,7 +109,7 @@ options.load = function(){
 
 };
 options.save = function(){
-
+	saveFile(points, 'travel-times.json');
 };
 
 var start = function(){
@@ -99,10 +119,10 @@ var start = function(){
 
 	left = L
 			.map(leftEl)
-			.setView([0,0], 1);
+			.setView([0,0], 3);
 	right = L
 			.map(rightEl)
-			.setView([0,0], 1);
+			.setView([0,0], 3);
 
 	var scale = window.devicePixelRatio > 1 ? '@2x' : '';
 
@@ -116,7 +136,6 @@ var start = function(){
 		})
 	// tiles.addTo(left);
 	tiles.addTo(right);
-
 
 	//add DATGUI
 	var gui = new dat.GUI();
@@ -135,6 +154,9 @@ var start = function(){
 	//set london as initial view
 	pointTo(51.507351, -0.127758);
 	options.load();
+
+	window.setTimeout(left.invalidateSize);
+	window.setTimeout(right.invalidateSize);
 
 };
 
