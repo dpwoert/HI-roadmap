@@ -8,9 +8,8 @@ html, body{
 	height: 100%;
 }
 
-.map--half{
+.map{
 	height: 100%;
-	width: 50%;
-	float: left;
+	width: 100%;
 	position: relative;
 }

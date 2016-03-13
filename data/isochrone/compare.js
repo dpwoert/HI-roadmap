@@ -1,11 +1,9 @@
-var left, right, image, markerLeft,markerRight, f0, f1;
+var map, background, drawnItems, image, f0, f1;
 var options = {
 	map: '1881',
 	legends: [],
 	value: ''
 };
-var points = [];
-var pointer = 0;
 
 var saveFile = function(data, filename){
 
@@ -27,66 +25,23 @@ var saveFile = function(data, filename){
 
 };
 
-var pointTo = function(lat, lon){
+var getShapeColor = function(color){
 
-	if(markerLeft){
-		left.removeLayer(markerLeft);
-		right.removeLayer(markerRight);
+	switch(color){
+		case 'green': return '#1cb83a';
+		case 'brown': return '#7e6026';
+		case 'pink': return '#e90fb1';
+		case 'yellow': return '#dfdd2f';
+		case 'blue': return 'rgb(16, 106, 180)';
+		default: return '#ffffff';
 	}
-
-	var geo = new L.LatLng(lon, lat);
-	markerLeft = L.marker(geo);
-	markerRight = L.marker(geo);
-	markerLeft.addTo(left);
-	markerRight.addTo(right);
-
-	left.panTo(geo);
-	right.panTo(geo);
-
-};
-
-options.setPoint = function(i){
-
-	pointer = i;
-	pointTo(points[pointer].center[0], points[pointer].center[1]);
-
-};
-
-options.next = function(){
-
-	//save before
-	options.change();
-
-	var next = pointer + 1 === points.length ? 0 : (pointer + 1);
-	options.setPoint(pointer + 1);
-}
-options.previous = function(){
-
-	//save before
-	options.change();
-
-	var previous = pointer === 0 ? points.length - 1 : pointer - 1;
-	options.setPoint(previous);
-}
-
-options.change = function(){
-	points[pointer][options.map] = options.value;
-
-	//clear old data
-	points[pointer].a = undefined;
-	points[pointer].b = undefined;
-	points[pointer].c = undefined;
 
 };
 
 options.load = function(){
 
 	if(image){
-		left.removeLayer(image);
-	}
-	if(markerLeft){
-		left.removeLayer(markerLeft);
-		right.removeLayer(markerRight);
+		background.removeLayer(image);
 	}
 
 	switch(options.map){
@@ -95,17 +50,11 @@ options.load = function(){
 
 			var imageBounds = [[70,-160], [-40,180]];
 			var url = '../../data/maps/Isochronic_Passage_Chart_Francis_Galton_1881.jpg';
-			image = L.imageOverlay(url, imageBounds).addTo(left);
+			image = L.imageOverlay(url, imageBounds).addTo(background);
+			// image.setOpacity(0.5);
 
-			options.legends = ['choose','green', 'yellow', 'pink', 'blue', 'brown'];
-
-			var loader = new THREE.XHRLoader();
-			loader.load('../map.json', function (res) {
-
-				points = JSON.parse(res);
-				options.setPoint(0);
-
-			});
+			options.legends = ['green', 'yellow', 'pink', 'blue', 'brown'];
+			options.legendValues = [24*10, 20*24, 30*24, 40*24, 50*24];
 
 		break;
 
@@ -113,17 +62,10 @@ options.load = function(){
 
 			var imageBounds = [[90,-180], [-90,180]];
 			var url = '../../data/maps/world-map-isochronic-2016-v2.jpg';
-			image = L.imageOverlay(url, imageBounds).addTo(left);
+			image = L.imageOverlay(url, imageBounds).addTo(background);
 
-			options.legends = ['choose','dark-red', 'red', 'light-red', 'yellow', 'green', 'dark-blue', 'blue'];
-
-			var loader = new THREE.XHRLoader();
-			loader.load('../map.json', function (res) {
-
-				points = JSON.parse(res);
-				options.setPoint(0);
-
-			});
+			options.legends = ['dark-red', 'red', 'light-red', 'yellow', 'green', 'dark-blue', 'blue'];
+			options.legendValues = [12, 18, 24, 36, 48];
 
 		break;
 
@@ -141,33 +83,58 @@ options.load = function(){
 
 };
 options.save = function(){
-	saveFile(points, 'travel-times.json');
+
+	var geo = drawnItems.toGeoJSON();
+	var layers = drawnItems.getLayers();
+
+	//get properties
+	layers.forEach(function(layer, key){
+
+		var index = options.legends.indexOf(layer.travelTime);
+		geo.features[key].properties.color = layer.travelTime;
+		geo.features[key].properties.travelTime = options.legendValues[index];
+
+	})
+
+	saveFile(points, 'travel-times-'+ options.map +'.geojson');
 };
 
 var start = function(){
 
-	var leftEl = document.querySelector('.map--left');
-	var rightEl = document.querySelector('.map--right');
+	var mapEl = document.querySelector('.map');
 
-	left = L
-			.map(leftEl)
-			.setView([0,0], 3);
-	right = L
-			.map(rightEl)
-			.setView([0,0], 3);
+	//create container
+	map = L
+			.map(mapEl)
+			.setView([20,0], 3);
 
-	var scale = window.devicePixelRatio > 1 ? '@2x' : '';
+	// Initialise the FeatureGroup to store editable layers
+	background = new L.FeatureGroup();
+	map.addLayer(background);
 
-	var tiles = L
-		.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}'+scale+'.png?access_token={accessToken}', {
-			attribution: '',
-			id: 'dpwoert.map-7fihcchk',
-			accessToken: 'pk.eyJ1IjoiZHB3b2VydCIsImEiOiJOSF9GWUZvIn0.Y7PPbCkmFpSCAj7ew_ppwQ',
-			zoomControl: false,
-			// detectRetina: true
-		})
-	// tiles.addTo(left);
-	tiles.addTo(right);
+	// Initialise the FeatureGroup to store editable layers
+	drawnItems = new L.FeatureGroup();
+	map.addLayer(drawnItems);
+
+	// Initialise the draw control and pass it the FeatureGroup of editable layers
+	var drawControl = new L.Control.Draw({
+		edit: {
+  			featureGroup: drawnItems
+		}
+	});
+	map.addControl(drawControl);
+
+	map.on('draw:created', function(event) {
+		var layer = event.layer;
+
+		//save legend value
+		layer.travelTime = options.value;
+
+		//get color
+		layer.options.color = getShapeColor(options.value);
+		drawnItems.addLayer(layer);
+
+	});
 
 	//add DATGUI
 	var gui = new dat.GUI();
@@ -179,16 +146,11 @@ var start = function(){
 	f0.add(options, 'load').name('change map')
 	f0.add(options, 'save').name('save map')
 
-	f1.add(options, 'value', options.legends).name('value').onFinishChange(options.change);
-	f1.add(options, 'next').name('next');
-	f1.add(options, 'previous').name('previous');
+	f1.add(options, 'value', options.legends).name('value');
 
-	//set london as initial view
-	pointTo(51.507351, -0.127758);
 	options.load();
 
-	window.setTimeout(left.invalidateSize);
-	window.setTimeout(right.invalidateSize);
+	map.invalidateSize()
 
 };
 
