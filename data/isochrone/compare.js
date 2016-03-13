@@ -109,6 +109,24 @@ options.load = function(){
 
 		break;
 
+		case '2016':
+
+			var imageBounds = [[90,-180], [-90,180]];
+			var url = '../../data/maps/world-map-isochronic-2016-v2.jpg';
+			image = L.imageOverlay(url, imageBounds).addTo(left);
+
+			options.legends = ['choose','dark-red', 'red', 'light-red', 'yellow', 'green', 'dark-blue', 'blue'];
+
+			var loader = new THREE.XHRLoader();
+			loader.load('../map.json', function (res) {
+
+				points = JSON.parse(res);
+				options.setPoint(0);
+
+			});
+
+		break;
+
 	}
 
 	for (var i in f1.__controllers) {

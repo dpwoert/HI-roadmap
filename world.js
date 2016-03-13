@@ -88,7 +88,7 @@ window.World = function(){
 			shading: THREE.FlatShading,
 			vertexColors: THREE.VertexColors,
 			transparent: true,
-			opacity: 0.7
+			opacity: 0.4
 		});
 
 		var faces = JSON.parse( res );
@@ -109,6 +109,14 @@ window.World = function(){
 
 				case 'blue':
 					color = new THREE.Color(0, 0, 1);
+				break;
+
+				case 'green':
+					color = new THREE.Color(0, 1, 0);
+				break;
+
+				case 'brown':
+					color = new THREE.Color(0.64, 0.44, 0.18);
 				break;
 
 			}
