@@ -6,7 +6,7 @@ var points = fs.readFileSync(__dirname + '/../data/faces.json');
 points = JSON.parse(points);
 var retrieve = function(year){
 
-	var map = fs.readFileSync(__dirname + '/../data/travel-times-1881.geojson');
+	var map = fs.readFileSync(__dirname + '/../data/travel-times-'+ year +'.geojson');
 	map = JSON.parse(map);
 
 	points.forEach(function(point, key){
@@ -56,10 +56,6 @@ var retrieve = function(year){
 		}
 
 		point.center = center.geometry.coordinates;
-		delete point.a;
-		delete point.b;
-		delete point.c;
-
 		console.log('done for gridpoint ' + key + ' of ' + points.length + ' for year ' + year);
 
 	});
@@ -67,6 +63,14 @@ var retrieve = function(year){
 };
 
 retrieve(1881);
+retrieve(2016);
+
+//clean
+points.forEach(function(point){
+	delete point.a;
+	delete point.b;
+	delete point.c;
+});
 
 //save again
 var data = JSON.stringify(points);

@@ -133,6 +133,10 @@ window.Timeline = function(world){
 			}
 
 		});
+
+		this.now = now[2] + (now[1] * 30 + now[0]) / 356;
+		this._now = now;
+
 	};
 
 	this.build = function(){
@@ -237,6 +241,9 @@ window.Timeline = function(world){
 				}
 
 			});
+
+		//set to first marker
+		this.setMarker(list[0]);
 
 	};
 

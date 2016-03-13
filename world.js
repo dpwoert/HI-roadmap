@@ -80,66 +80,7 @@ window.World = function(){
 
 	}.bind(this));
 
-	var loader2 = new THREE.XHRLoader();
-	loader2.load('data/travel-times.json', function (res) {
-
-		debugger
-
-		var geometry = new THREE.IcosahedronGeometry( this.radius + 0.4, cells );
-		var material = new THREE.MeshPhongMaterial({
-			shading: THREE.FlatShading,
-			vertexColors: THREE.VertexColors,
-			transparent: true,
-			opacity: 0.4
-		});
-
-		var faces = JSON.parse( res );
-		faces.forEach(function(face, i){
-
-			var color = new THREE.Color(255,255,255);
-
-			switch(face.travelTime['1881']){
-
-				case 240:
-					color = new THREE.Color(1.0, 0.99, 0.0);
-				break;
-
-				case 480:
-					color = new THREE.Color(1.0, 0.04, 0.99);
-				break;
-
-				case 720:
-					color = new THREE.Color(0, 0, 1);
-				break;
-
-				case 960:
-					color = new THREE.Color(0, 1, 0);
-				break;
-
-				case 1200:
-					color = new THREE.Color(0.64, 0.44, 0.18);
-				break;
-
-			}
-
-			geometry.faces[i].color.copy(color);
-		});
-
-		geometry.colorsNeedUpdate = true;
-		var mesh = new THREE.Mesh( geometry, material );
-		this.scene.add(mesh);
-
-	}.bind(this));
-
-	// this.renderManager.pipe('random', function(){
-	//
-	// 		geometry.faces.forEach(function(face, i){
-	// 			geometry.faces[i].color.setRGB(Math.random(), Math.random(), Math.random());
-	// 		});
-	//
-	// 		geometry.colorsNeedUpdate = true;
-	//
-	// })
+	var heatmap = new Heatmap(this);
 
 	//add controls
 	var controls = new THREE.OrbitControls( this.camera, renderer.domElement );
