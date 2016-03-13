@@ -37,7 +37,7 @@ window.World = function(){
 		.renderToScreen();
 
 	//create globe
-	var cells = 5;
+	var cells = 6;
 	this.radius = 10;
 
 	//get colors
@@ -83,6 +83,8 @@ window.World = function(){
 	var loader2 = new THREE.XHRLoader();
 	loader2.load('data/travel-times.json', function (res) {
 
+		debugger
+
 		var geometry = new THREE.IcosahedronGeometry( this.radius + 0.4, cells );
 		var material = new THREE.MeshPhongMaterial({
 			shading: THREE.FlatShading,
@@ -92,30 +94,29 @@ window.World = function(){
 		});
 
 		var faces = JSON.parse( res );
-		console.log(faces);
 		faces.forEach(function(face, i){
 
 			var color = new THREE.Color(255,255,255);
 
-			switch(face['1881']){
+			switch(face.travelTime['1881']){
 
-				case 'yellow':
+				case 240:
 					color = new THREE.Color(1.0, 0.99, 0.0);
 				break;
 
-				case 'pink':
+				case 480:
 					color = new THREE.Color(1.0, 0.04, 0.99);
 				break;
 
-				case 'blue':
+				case 720:
 					color = new THREE.Color(0, 0, 1);
 				break;
 
-				case 'green':
+				case 960:
 					color = new THREE.Color(0, 1, 0);
 				break;
 
-				case 'brown':
+				case 1200:
 					color = new THREE.Color(0.64, 0.44, 0.18);
 				break;
 

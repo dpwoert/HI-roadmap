@@ -53,8 +53,8 @@ options.load = function(){
 			image = L.imageOverlay(url, imageBounds).addTo(background);
 			// image.setOpacity(0.5);
 
-			options.legends = ['green', 'yellow', 'pink', 'blue', 'brown'];
-			options.legendValues = [24*10, 20*24, 30*24, 40*24, 50*24];
+			options.legends = ['choose', 'green', 'yellow', 'pink', 'blue', 'brown'];
+			options.legendValues = [0, 24*10, 20*24, 30*24, 40*24, 50*24];
 
 		break;
 
@@ -64,8 +64,8 @@ options.load = function(){
 			var url = '../../data/maps/world-map-isochronic-2016-v2.jpg';
 			image = L.imageOverlay(url, imageBounds).addTo(background);
 
-			options.legends = ['dark-red', 'red', 'light-red', 'yellow', 'green', 'dark-blue', 'blue'];
-			options.legendValues = [12, 18, 24, 36, 48];
+			options.legends = ['choose', 'dark-red', 'red', 'light-red', 'yellow', 'green', 'dark-blue', 'blue'];
+			options.legendValues = [0, 12, 18, 24, 36, 48];
 
 		break;
 
@@ -96,7 +96,7 @@ options.save = function(){
 
 	})
 
-	saveFile(points, 'travel-times-'+ options.map +'.geojson');
+	saveFile(geo, 'travel-times-'+ options.map +'.geojson');
 };
 
 var start = function(){
