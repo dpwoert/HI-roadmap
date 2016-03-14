@@ -6,6 +6,7 @@ window.Timeline = function(world){
 	var now = [];
 	var grippy;
 	var scale;
+	var tweenable = new Tweenable();
 
 	var relateDate = function(date, date2){
 		if(date[2] < date2[2]){
@@ -97,6 +98,8 @@ window.Timeline = function(world){
 
 	this.setDate = function(date){
 
+		var oldDate = now.length === 0 ? date : now;
+
 		//save current date
 		now = date;
 
@@ -134,7 +137,23 @@ window.Timeline = function(world){
 
 		});
 
-		this.now = now[2] + (now[1] * 30 + now[0]) / 356;
+		// Tweenable.stop();
+		console.log(oldDate);
+		console.log(now);
+		tweenable.tween({
+		  from: { date: oldDate[2] + (oldDate[1] * 30 + oldDate[0]) / 356 },
+		  to: { date: now[2] + (now[1] * 30 + now[0]) / 356 },
+		  duration: 1500,
+		  easing: 'easeOutQuad',
+			step: function(state){
+				this.now = state.date;
+			}.bind(this),
+		  finish: function () {
+				this.now = now[2] + (now[1] * 30 + now[0]) / 356
+			}.bind(this)
+		});
+
+		// this.now = now[2] + (now[1] * 30 + now[0]) / 356;
 		this._now = now;
 
 	};
