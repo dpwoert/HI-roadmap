@@ -4,9 +4,10 @@ window.Timeline = function(world){
 	var bounds = {min: undefined, max: undefined};
 	var pxBounds = [100, 2000];
 	var now = [];
-	var grippy;
+	var grippy, grippy2;
 	var scale;
 	var tweenable = new Tweenable();
+	var mode = 0;
 
 	var relateDate = function(date, date2){
 		if(date[2] < date2[2]){
@@ -98,6 +99,10 @@ window.Timeline = function(world){
 
 	this.setDate = function(date){
 
+		if(this._now && this._now[2] === date[2]){
+			return false;
+		}
+
 		var oldDate = now.length === 0 ? date : now;
 
 		//save current date
@@ -133,8 +138,8 @@ window.Timeline = function(world){
 		});
 
 		// Tweenable.stop();
-		console.log(oldDate);
-		console.log(now);
+		// console.log(oldDate);
+		// console.log(now);
 		tweenable.tween({
 		  from: { date: oldDate[2] + (oldDate[1] * 30 + oldDate[0]) / 356 },
 		  to: { date: now[2] + (now[1] * 30 + now[0]) / 356 },
@@ -151,6 +156,15 @@ window.Timeline = function(world){
 		// this.now = now[2] + (now[1] * 30 + now[0]) / 356;
 		this._now = now;
 
+	};
+
+	this.switchMode = function(_mode){
+		mode = _mode;
+
+		if(mode === 0){
+			grippy.attr('display', 'none');
+			document.querySelector('.timeline--fixed').style.display = 'block';
+		}
 	};
 
 	this.build = function(){
@@ -226,6 +240,19 @@ window.Timeline = function(world){
 					self.setMarker(evt);
 				});
 
+			//get box
+			var top = getPosition(evt.date);
+			var bottom = top + 20;
+
+			//content
+			var content = evt.marker().content;
+			if(content){
+				content = document.querySelector(content);
+				content.style.top = getPosition(evt.date) + 'px';
+				bottom += content.offsetHeight;
+			}
+
+			evt.scrollBox = [top, bottom];
 
 		});
 
@@ -261,6 +288,25 @@ window.Timeline = function(world){
 
 		//set to first marker
 		this.setMarker(list[0]);
+		this.switchMode(0);
+
+		var self = this;
+
+		document
+			.querySelector('.timeline__wrapper')
+			.addEventListener('scroll', function(event){
+
+				var scrollPos = event.target.scrollTop + 100;
+
+				list.forEach(function(evt){
+
+					if(scrollPos > evt.scrollBox[0] && scrollPos < evt.scrollBox[1]){
+						self.setMarker(evt);
+					}
+
+				});
+
+			}.bind(this));
 
 	};
 

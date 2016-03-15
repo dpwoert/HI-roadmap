@@ -36,6 +36,13 @@ html, body{
 	overflow: visible;
 }
 
+.timeline--fixed{
+	position: fixed;
+	top: 0;
+	height: 200px;
+	width: 100%;
+}
+
 .timeline_scroll-down{
 	display: none;
 }
@@ -82,4 +89,19 @@ html, body{
 .timeline__point--space,
 .timeline__year--space{
 	fill: rgb(181, 0, 255);
+}
+
+.timeline__content{
+	position: absolute;
+	left: 65px;
+	width: 285px;
+	height: auto;
+	padding: 20px;
+	color: #aaa;
+	font-size: 11px;
+	font-family: 'Avenir';
+}
+
+.timeline__content--active{
+	color: #eee;
 }

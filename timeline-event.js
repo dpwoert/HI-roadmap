@@ -25,7 +25,7 @@ window.TimelineEvent = function(timeline){
 		return this;
 	};
 
-	this.marker = function(name, type){
+	this.marker = function(name, type, content){
 
 		if(!name){
 			return marker;
@@ -33,6 +33,7 @@ window.TimelineEvent = function(timeline){
 
 		marker.name = name;
 		marker.type = type || 'none';
+		marker.content = content;
 
 		//chainable
 		return this;

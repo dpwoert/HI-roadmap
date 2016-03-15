@@ -5,8 +5,7 @@
 
 	evt
 		.setDate(1,1,1910)
-		.marker('First Atlantic flight', 'aviation')
-		.sidebar('timeline/images/atlantic-flight.jpg', 'test content')
+		.marker('First Atlantic flight', 'aviation', '.timeline__content--atlantic-flight')
 		.onActive(function(world){
 
 			//add test route
