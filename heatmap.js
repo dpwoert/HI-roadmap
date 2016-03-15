@@ -24,7 +24,7 @@ window.Heatmap = function(world){
 			shading: THREE.FlatShading,
 			vertexColors: THREE.VertexColors,
 			transparent: true,
-			opacity: 0.4
+			opacity: 0.5
 		});
 
 		var faces = JSON.parse( res );
@@ -37,7 +37,7 @@ window.Heatmap = function(world){
 
 		geometry.colorsNeedUpdate = true;
 		var mesh = new THREE.Mesh( geometry, material );
-		world.scene.add(mesh);
+		// world.scene.add(mesh);
 
 		var yearRange = d3.scale.linear().domain([1881, 2016]).range([0,1]);
 

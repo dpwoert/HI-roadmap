@@ -25,15 +25,14 @@ window.TimelineEvent = function(timeline){
 		return this;
 	};
 
-	this.marker = function(name, color, icon){
+	this.marker = function(name, type){
 
 		if(!name){
 			return marker;
 		}
 
 		marker.name = name;
-		marker.color = color || 'black';
-		marker.icon = icon || 'none';
+		marker.type = type || 'none';
 
 		//chainable
 		return this;

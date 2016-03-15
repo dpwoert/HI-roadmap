@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(1,1,1880)
-		.marker('Immigration to USA')
+		.marker('Immigration to USA', 'driver')
 		.onActive(function(world){
 
 			//add test route

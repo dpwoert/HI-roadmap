@@ -11,12 +11,60 @@ var bullitMaterial = new THREE.MeshBasicMaterial({
 	// shading: THREE.FlatShading
 });
 
+var createLabel = function(label, position){
+
+	var fontface = 'Helvetica neue';
+	var fontsize = 18 * window.devicePixelRatio;
+	var paddingTop = 5 * window.devicePixelRatio;
+	var paddingLeft = 10 * window.devicePixelRatio;
+	// var spriteAlignment = THREE.SpriteAlignment.topLeft;
+
+	var canvas = document.createElement('canvas');
+	canvas.width = 256 * window.devicePixelRatio;
+	canvas.height = 256 * window.devicePixelRatio;
+
+	var context = canvas.getContext('2d');
+	context.font = "Bold " + fontsize + "px " + fontface;
+
+	// get size data (height depends only on font size)
+	var metrics = context.measureText( label );
+	var textWidth = metrics.width;
+	var textHeight = fontsize * 1.4;
+
+	var left = canvas.width / 2 - textWidth / 2 - paddingLeft;
+	var top = canvas.height / 2 - textHeight / 2 - paddingTop;
+
+	// background color
+	context.fillStyle = "black";
+	context.fillRect(left, top,textWidth + paddingLeft * 2,textHeight + paddingTop * 2);
+
+	// label
+	context.fillStyle = "white";
+	context.fillText( label, left + paddingLeft, canvas.height/2 + paddingTop);
+
+	// canvas contents will be used for a texture
+	var texture = new THREE.Texture(canvas)
+	texture.needsUpdate = true;
+
+	var spriteMaterial = new THREE.SpriteMaterial({ map: texture, color: 0xffffff });
+	var sprite = new THREE.Sprite( spriteMaterial );
+	var ratio = 0.02;
+	sprite.scale.set( 256 * ratio, 256 * ratio, 256 * ratio );
+	sprite.needsUpdate = true;
+	sprite.frustumCulled = false;
+	sprite.position.copy(position);
+
+	return sprite;
+
+}
+
 window.Route = function(world){
 
 	var id = THREE.Math.generateUUID();
 	var points = [];
 	var curves = [];
 	var meshes = [];
+	var labels = [];
 	var useTracking = false;
 	var trackSpeed = 0;
 
@@ -30,7 +78,7 @@ window.Route = function(world){
 
 	var addCurve
 
-	this.add = function(lat, lon, curveHeight){
+	this.add = function(lat, lon, curveHeight, label){
 
 		var previous = getPrevious();
 		var point = tools.degreeToVec3(lat, lon, 0.3, world.radius);
@@ -44,6 +92,17 @@ window.Route = function(world){
 
 			var curve = new THREE.QuadraticBezierCurve3(previous, center, point);
 			curves.push(curve);
+		}
+
+		//label
+		if(label){
+
+			var labelPos = new THREE.Vector3(0,0,0).lerp(point, 1 + 0.1);
+			var _label = createLabel(label, labelPos);
+
+			meshes.push(_label);
+			world.rotated.add(_label);
+
 		}
 
 		//chainable

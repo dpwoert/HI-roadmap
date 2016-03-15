@@ -2,7 +2,7 @@ window.Timeline = function(world){
 
 	var list = [];
 	var bounds = {min: undefined, max: undefined};
-	var pxBounds = [100, window.innerHeight - 50];
+	var pxBounds = [100, 2000];
 	var now = [];
 	var grippy;
 	var scale;
@@ -126,12 +126,7 @@ window.Timeline = function(world){
 			if(active){
 
 				//sidebar
-				var sidebar = document.querySelector('.sidebar');
-				var image = sidebar.querySelector('.sidebar__image');
-				var content = sidebar.querySelector('.sidebar__content');
-				var info = evt.sidebar();
-				image.style.backgroundImage = 'url(' + info.image + ')';
-				content.innerHTML = info.html;
+
 
 			}
 
@@ -165,8 +160,12 @@ window.Timeline = function(world){
 
 		//create HTML
 		var svg = d3.select('.timeline');
+		var _svg = document.querySelector('.timeline');
 		var group =	svg.append('g');
-		var left = 33;
+		var left = 65;
+
+		_svg.style.height = pxBounds[1] + 100 + 'px';
+
 
 		//base line
 		var line = group
@@ -190,12 +189,10 @@ window.Timeline = function(world){
 			//marker
 			evtGroup
 				.append('circle')
-				.attr('class', 'timeline__point')
-				.attr('r', 2)
+				.attr('class', 'timeline__point timeline__point--' + evt.marker().type)
+				.attr('r', 6)
 				.attr('cx', left)
 				.attr('cy', getPosition(evt.date))
-				.attr('fill', '#777')
-				.attr('stroke', 'none')
 				.on('mousedown', function(){
 					self.setMarker(evt);
 				});
@@ -203,12 +200,13 @@ window.Timeline = function(world){
 			//year label
 			evtGroup
 				.append('text')
-				.attr('class', 'timeline__year')
-				.attr('x', left + 10)
+				.attr('class', 'timeline__year timeline__year--' + evt.marker().type)
+				.attr('x', left - 25)
 				.attr('y', getPosition(evt.date))
 				.attr('fill', '#777')
 				.attr('stroke', 'none')
 				.attr('alignment-baseline', 'central')
+				.attr('text-anchor', 'middle')
 				.text(evt.date[2])
 				.on('mousedown', function(){
 					self.setMarker(evt);
@@ -219,8 +217,8 @@ window.Timeline = function(world){
 				.append('text')
 				.attr('class', 'timeline__evt-label')
 				.attr('x', left + 10)
-				.attr('y', getPosition(evt.date) + 14)
-				.attr('fill', '#777')
+				.attr('y', getPosition(evt.date))
+				// .attr('fill', '#777')
 				.attr('stroke', 'none')
 				.attr('alignment-baseline', 'central')
 				.text(evt.marker().name)
