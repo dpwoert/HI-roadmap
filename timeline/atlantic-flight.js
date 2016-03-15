@@ -16,7 +16,7 @@
 			route
 				.add(51.507351, -0.127758, undefined, 'London')
 				.add(40.712784, -74.005941, 7.5, 'New York')
-				.build();
+				.build('aviation');
 
 		})
 		.onLeave(function(){

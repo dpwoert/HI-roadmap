@@ -36,6 +36,10 @@ html, body{
 	overflow: visible;
 }
 
+.timeline_scroll-down{
+	display: none;
+}
+
 .timeline__point{
 	fill: #777;
 	stroke: #161F26;
