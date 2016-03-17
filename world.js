@@ -80,7 +80,7 @@ window.World = function(){
 
 	}.bind(this));
 
-	var heatmap = new Heatmap(this);
+	this.heatmap = new Heatmap(this);
 
 	//add controls
 	var controls = new THREE.OrbitControls( this.camera, renderer.domElement );

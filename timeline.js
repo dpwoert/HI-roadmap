@@ -2,10 +2,11 @@ window.Timeline = function(world){
 
 	var list = [];
 	var bounds = {min: undefined, max: undefined};
-	var pxBounds = [100, 2000];
+	var pxBounds = [100, 1500];
 	var now = [];
 	var grippy, grippy2;
 	var scale;
+	var group;
 	var tweenable = new Tweenable();
 	var mode = 0;
 
@@ -27,9 +28,34 @@ window.Timeline = function(world){
 		return 'after';
 	};
 
-	var getPosition = function(date){
-		var now = date[2] + (date[1] * 30 + date[0]) / 356;
-		return scale(now);
+	var getPosition = function(evt, i){
+
+		if(mode === 0){
+
+			if(i === 0){
+				return pxBounds[0];
+			} else {
+
+				var prevEvt = list[i-1];
+				var prevBullit = document.querySelectorAll('.timeline__point')[i-1];
+				var prevEl = document.querySelector(prevEvt.marker().content);
+
+				var top = parseInt(prevBullit.getAttribute('cy'));
+				top += 60;
+
+				if(prevEl){
+					top += prevEl.offsetHeight;
+				}
+
+				return top;
+			}
+
+		} else {
+
+			var now = evt.date[2] + (evt.date[1] * 30 + evt.date[0]) / 356;
+			return scale(now);
+
+		}
 	};
 
 	var calculateBounds = function(){
@@ -50,7 +76,11 @@ window.Timeline = function(world){
 		var min = bounds.min[2] + (bounds.min[1] * 30 + bounds.min[0]) / 356;
 		var max = bounds.max[2] + (bounds.max[1] * 30 + bounds.max[0]) / 356;
 
-		scale = d3.scale.linear().domain([min, max]).range(pxBounds);
+		var extent = d3.extent(list, function(d){
+			return d.date[2] + (d.date[1] * 30 + d.date[0]) / 356;
+		})
+
+		scale = d3.scale.linear().domain(extent).range(pxBounds);
 
 	};
 
@@ -112,7 +142,7 @@ window.Timeline = function(world){
 		grippy
 			.transition()
 			.duration(200)
-			.attr('cy', getPosition(date));
+			// .attr('cy', getPosition(date));
 
 		//set active for events
 		list.forEach(function(evt){
@@ -141,15 +171,15 @@ window.Timeline = function(world){
 		// console.log(oldDate);
 		// console.log(now);
 		tweenable.tween({
-		  from: { date: oldDate[2] + (oldDate[1] * 30 + oldDate[0]) / 356 },
-		  to: { date: now[2] + (now[1] * 30 + now[0]) / 356 },
-		  duration: 1500,
-		  easing: 'easeOutQuad',
+			from: { date: oldDate[2] + (oldDate[1] * 30 + oldDate[0]) / 356 },
+			to: { date: now[2] + (now[1] * 30 + now[0]) / 356 },
+			duration: 1500,
+			easing: 'easeOutQuad',
 			step: function(state){
 				this.now = state.date;
 			}.bind(this),
 		  finish: function () {
-				this.now = now[2] + (now[1] * 30 + now[0]) / 356
+				this.now = now[2] + (now[1] * 30 + now[0]) / 356;
 			}.bind(this)
 		});
 
@@ -164,10 +194,59 @@ window.Timeline = function(world){
 		if(mode === 0){
 			grippy.attr('display', 'none');
 			document.querySelector('.timeline--fixed').style.display = 'block';
+			document.querySelector('.timeline__content__wrapper').style.opacity = 1;
+
+			world.heatmap.show(false);
+
 		}
+		else{
+			grippy.attr('display', 'block');
+			document.querySelector('.timeline--fixed').style.display = 'none';
+			document.querySelector('.timeline__content__wrapper').style.opacity = 0;
+
+			d3
+				.select('.timeline__baseline')
+				.attr('y2', pxBounds[1])
+
+			world.heatmap.show(true);
+		}
+
+		//marker
+		group
+			.selectAll('.timeline__point')
+			.transition()
+			.duration(200)
+			.attr('cy', function(d, i){
+				return getPosition(d,i);
+			});
+
+		//year
+		group
+			.selectAll('.timeline__year')
+			.transition()
+			.duration(200)
+			.attr('y', function(d, i){
+				return getPosition(d,i);
+			});
+
+		//label
+		group
+			.selectAll('.timeline__evt-label')
+			.transition()
+			.duration(200)
+			.attr('y', function(d, i){
+				return getPosition(d,i);
+			});
 	};
 
 	this.build = function(){
+
+		//order on date
+		list.sort(function(a, b){
+			a = a.date[2] + (a.date[1] * 30 + a.date[0]) / 356;
+			b = b.date[2] + (b.date[1] * 30 + b.date[0]) / 356;
+			return a > b;
+		});
 
 		var self = this;
 		calculateBounds();
@@ -175,11 +254,10 @@ window.Timeline = function(world){
 		//create HTML
 		var svg = d3.select('.timeline');
 		var _svg = document.querySelector('.timeline');
-		var group =	svg.append('g');
+		group =	svg.append('g');
 		var left = 65;
 
 		_svg.style.height = pxBounds[1] + 100 + 'px';
-
 
 		//base line
 		var line = group
@@ -193,62 +271,72 @@ window.Timeline = function(world){
 			.attr('stroke-width', 1)
 			.attr('stroke-dasharray', '1,2');
 
+		//marker
+		group
+			.selectAll('.timeline__point')
+			.data(list)
+			.enter()
+
+			.append('circle')
+			.attr('class', function(d){ return 'timeline__point timeline__point--' + d.marker().type; })
+			.attr('r', 6)
+			.attr('cx', left)
+			.attr('cy', function(d, i){
+				return getPosition(d, i)
+			})
+			.on('mousedown', function(d){
+				self.setMarker(d);
+			});
+
+		//year label
+		group
+			.selectAll('.timeline__year')
+			.data(list)
+			.enter()
+
+			.append('text')
+			.attr('class', function(d){ return 'timeline__year timeline__year--' + d.marker().type })
+			.attr('x', left - 25)
+			.attr('y', function(d, i){ return getPosition(d, i); })
+			.attr('fill', '#777')
+			.attr('stroke', 'none')
+			.attr('alignment-baseline', 'central')
+			.attr('text-anchor', 'middle')
+			.text(function(d){ return d.date[2]; })
+			.on('mousedown', function(d){
+				self.setMarker(d);
+			});
+
+		//name label
+		group
+			.selectAll('.timeline__evt-label')
+			.data(list)
+			.enter()
+
+			.append('text')
+			.attr('class', 'timeline__evt-label')
+			.attr('x', left + 10)
+			.attr('y', function(d, i){ return getPosition(d, i); })
+			// .attr('fill', '#777')
+			.attr('stroke', 'none')
+			.attr('alignment-baseline', 'central')
+			.text(function(d){ return d.marker().name; })
+			.on('mousedown', function(d){
+				self.setMarker(d);
+			});
+
 		//add markers
-		list.forEach(function(evt){
-
-			var evtGroup = group
-				.append('g')
-				.attr('class', 'timeline__event-group');
-
-			//marker
-			evtGroup
-				.append('circle')
-				.attr('class', 'timeline__point timeline__point--' + evt.marker().type)
-				.attr('r', 6)
-				.attr('cx', left)
-				.attr('cy', getPosition(evt.date))
-				.on('mousedown', function(){
-					self.setMarker(evt);
-				});
-
-			//year label
-			evtGroup
-				.append('text')
-				.attr('class', 'timeline__year timeline__year--' + evt.marker().type)
-				.attr('x', left - 25)
-				.attr('y', getPosition(evt.date))
-				.attr('fill', '#777')
-				.attr('stroke', 'none')
-				.attr('alignment-baseline', 'central')
-				.attr('text-anchor', 'middle')
-				.text(evt.date[2])
-				.on('mousedown', function(){
-					self.setMarker(evt);
-				});
-
-			//name label
-			evtGroup
-				.append('text')
-				.attr('class', 'timeline__evt-label')
-				.attr('x', left + 10)
-				.attr('y', getPosition(evt.date))
-				// .attr('fill', '#777')
-				.attr('stroke', 'none')
-				.attr('alignment-baseline', 'central')
-				.text(evt.marker().name)
-				.on('mousedown', function(){
-					self.setMarker(evt);
-				});
+		list.forEach(function(evt, i){
 
 			//get box
-			var top = getPosition(evt.date);
+			var top = getPosition(evt, i);
 			var bottom = top + 20;
 
 			//content
 			var content = evt.marker().content;
 			if(content){
 				content = document.querySelector(content);
-				content.style.top = getPosition(evt.date) + 'px';
+				content.style.top = getPosition(evt, i) + 'px';
 				bottom += content.offsetHeight;
 			}
 
@@ -296,6 +384,10 @@ window.Timeline = function(world){
 			.querySelector('.timeline__wrapper')
 			.addEventListener('scroll', function(event){
 
+				if(mode === 1){
+					return false;
+				}
+
 				var scrollPos = event.target.scrollTop + 100;
 
 				list.forEach(function(evt){
@@ -307,6 +399,12 @@ window.Timeline = function(world){
 				});
 
 			}.bind(this));
+
+		document
+			.querySelector('.timeline__switch')
+			.addEventListener('click', function(event){
+				self.switchMode(mode === 0 ? 1 : 0)
+			});
 
 	};
 

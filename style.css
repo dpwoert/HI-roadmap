@@ -43,7 +43,22 @@ html, body{
 	width: 100%;
 }
 
-.timeline_scroll-down{
+.timeline__switch{
+	position: absolute;
+	top: 16px;
+	right: 16px;
+	width: 16px;
+	height: 16px;
+	background: black;
+	border-radius: 16px;
+	z-index: 99;
+}
+
+.timeline__content__wrapper{
+	transition: 0.25s ease opacity;
+}
+
+.timeline__scroll-down{
 	display: none;
 }
 
@@ -80,7 +95,7 @@ html, body{
 }
 .timeline__point--rail,
 .timeline__year--rail{
-	fill: #0094ff;
+	fill: #ebe815;
 }
 .timeline__point--cars,
 .timeline__year--cars{

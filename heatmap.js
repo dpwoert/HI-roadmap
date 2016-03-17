@@ -1,5 +1,7 @@
 window.Heatmap = function(world){
 
+	var run;
+
 	var lerp = function(from, to, progress){
 		var delta = to - from;
 		return from + (delta*progress);
@@ -16,16 +18,17 @@ window.Heatmap = function(world){
 
 	};
 
+	var material = new THREE.MeshPhongMaterial({
+		shading: THREE.FlatShading,
+		vertexColors: THREE.VertexColors,
+		transparent: true,
+		opacity: 0.5
+	});
+
 	var loader = new THREE.XHRLoader();
 	loader.load('data/travel-times.json', function (res) {
 
 		var geometry = new THREE.IcosahedronGeometry( world.radius + 0.4, 6 );
-		var material = new THREE.MeshPhongMaterial({
-			shading: THREE.FlatShading,
-			vertexColors: THREE.VertexColors,
-			transparent: true,
-			opacity: 0.5
-		});
 
 		var faces = JSON.parse( res );
 		var color = new THREE.Color(255,255,255);
@@ -37,25 +40,36 @@ window.Heatmap = function(world){
 
 		geometry.colorsNeedUpdate = true;
 		var mesh = new THREE.Mesh( geometry, material );
-		// world.scene.add(mesh);
+		world.scene.add(mesh);
 
 		var yearRange = d3.scale.linear().domain([1881, 2016]).range([0,1]);
 
 		world.renderManager.pipe('heatmap', function(){
 
-				var now = timeline.now;
-				var nowRelative = yearRange(now);
+			if(!run){
+				return false;
+			}
 
-				geometry.faces.forEach(function(face, i){
-					var value = lerp( faces[i].travelTime['1881'], faces[i].travelTime['2016'], nowRelative );
-					geometry.faces[i].color.copy(getColor(value));
-				});
+			var now = timeline.now;
+			var nowRelative = yearRange(now);
 
-				geometry.colorsNeedUpdate = true;
+			geometry.faces.forEach(function(face, i){
+				var value = lerp( faces[i].travelTime['1881'], faces[i].travelTime['2016'], nowRelative );
+				geometry.faces[i].color.copy(getColor(value));
+			});
+
+			geometry.colorsNeedUpdate = true;
 
 		});
 
 	});
+
+	this.show = function(_run){
+
+		run = _run
+		material.opacity = run ? 0.3: 0;
+
+	};
 
 
 };

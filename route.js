@@ -88,10 +88,10 @@
 
 		var addCurve
 
-		this.add = function(lat, lon, curveHeight, label){
+		this.add = function(lat, lon, curveHeight, label, labelOffset){
 
 			var previous = getPrevious();
-			var point = tools.degreeToVec3(lat, lon, 0.3, world.radius);
+			var point = tools.degreeToVec3(lat, lon, 0.35, world.radius);
 			points.push(point);
 
 			//curve to somewhere
@@ -107,7 +107,9 @@
 			//label
 			if(label){
 
-				var labelPos = new THREE.Vector3(0,0,0).lerp(point, 1 + 0.1);
+				labelOffset = labelOffset || 0.1;
+
+				var labelPos = new THREE.Vector3(0,0,0).lerp(point, 1 + labelOffset);
 				var _label = createLabel(label, labelPos);
 
 				meshes.push(_label);
@@ -147,7 +149,7 @@
 			//create bullits
 			points.forEach(function(point, key){
 
-				var geometry = new THREE.SphereGeometry( 0.2, 12, 12 );
+				var geometry = new THREE.SphereGeometry( 0.1, 12, 12 );
 				var mesh = new THREE.Mesh( geometry, materials[type].bullit );
 
 				//set position
