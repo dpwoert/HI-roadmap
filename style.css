@@ -89,6 +89,10 @@ html, body{
 .timeline__year--driver{
 	fill: #ff0000;
 }
+.timeline__point--marine,
+.timeline__year--marine{
+	fill: #15D2B6;
+}
 .timeline__point--aviation,
 .timeline__year--aviation{
 	fill: #0094ff;
@@ -99,7 +103,7 @@ html, body{
 }
 .timeline__point--cars,
 .timeline__year--cars{
-	fill: #0094ff;
+	fill: #e643bd;
 }
 .timeline__point--space,
 .timeline__year--space{

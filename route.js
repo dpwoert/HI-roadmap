@@ -121,6 +121,24 @@
 			return this;
 		};
 
+		this.addPoint = function(lat, lon, label, labelOffset){
+
+			var point = tools.degreeToVec3(lat, lon, 0.35, world.radius);
+			points.push( point );
+
+			labelOffset = labelOffset || 0.1;
+
+			var labelPos = new THREE.Vector3(0,0,0).lerp(point, 1 + labelOffset);
+			var _label = createLabel(label, labelPos);
+
+			meshes.push(_label);
+			world.rotated.add(_label);
+
+			//chainable
+			return this;
+
+		}
+
 		this.build = function(type){
 
 			type = type || 'driver';
@@ -144,7 +162,7 @@
 
 			});
 
-			points.push(new THREE.Vector3(0,0,0))
+			// points.push(new THREE.Vector3(0,0,0))
 
 			//create bullits
 			points.forEach(function(point, key){

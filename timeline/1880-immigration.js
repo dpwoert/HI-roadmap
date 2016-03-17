@@ -13,8 +13,8 @@
 
 			//create points
 			route
-				.add(51.507351, -0.127758)
-				.add(40.712784, -74.005941, 3)
+				.add(53.408371, -2.991573, undefined, 'Liverpool')
+				.add(40.712784, -74.005941, 3, 'New York')
 				.build();
 
 		})
