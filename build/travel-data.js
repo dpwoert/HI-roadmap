@@ -3,6 +3,10 @@ var turf = require('turf');
 
 //get JSON object from data file
 var points = fs.readFileSync(__dirname + '/../data/faces.json');
+var world = fs.readFileSync(__dirname + '/../data/world.geojson');
+world = JSON.parse(world);
+var WO1 = ['United States of America', 'Brazil', 'Belgium', 'France', 'Germany', 'Austria', 'Hungary', 'United Kingdom','China','Greece','Italy','Japan','Liberia','Montenegro','Turkey','Russia','Portugal','Romania','Serbia','Thailand','Bulgaria','Ukraine','Belarus','Estonia','Latvia','Lithuania','Belarus','Poland'];
+
 points = JSON.parse(points);
 var retrieve = function(year){
 
@@ -26,6 +30,7 @@ var retrieve = function(year){
 		]]);
 
 		var center = turf.centroid(face);
+		point._center = center;
 
 		map.features.forEach(function(feature){
 
@@ -67,6 +72,17 @@ retrieve(2016);
 
 //clean
 points.forEach(function(point){
+
+	world.features.forEach(function(feature){
+
+		if(turf.inside(point._center, feature) && WO1.indexOf(feature.properties.name) > -1){
+			point.WO1 = true;
+			console.log('involved in war war 1: ', feature.properties.name);
+		}
+
+	});
+
+	delete point._center;
 	delete point.a;
 	delete point.b;
 	delete point.c;

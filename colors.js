@@ -4,5 +4,6 @@ window.colors = {
 	'aviation': new THREE.Color(0x0094ff),
 	'rail': new THREE.Color(0xebe815),
 	'cars': new THREE.Color(0xe643bd),
-	'space': new THREE.Color(255/181,0,1)
+	'space': new THREE.Color(255/181,0,1),
+	'empty': new THREE.Color(1,1,1)
 }

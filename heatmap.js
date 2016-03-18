@@ -46,17 +46,37 @@ window.Heatmap = function(world){
 
 		world.renderManager.pipe('heatmap', function(){
 
-			if(!run){
-				return false;
-			}
-
 			var now = timeline.now;
 			var nowRelative = yearRange(now);
 
-			geometry.faces.forEach(function(face, i){
-				var value = lerp( faces[i].travelTime['1881'], faces[i].travelTime['2016'], nowRelative );
-				geometry.faces[i].color.copy(getColor(value));
-			});
+
+			if(now > 1914 && now < 1919){
+
+				geometry.faces.forEach(function(face, i){
+					var war = faces[i].WO1;
+					// war = Math.random() > 0.5;
+					var color = war ? window.colors.driver : window.colors.empty;
+					geometry.faces[i].color.copy(color);
+				});
+
+				material.opacity = 0.3;
+
+			}
+			else {
+
+				material.opacity = run ? 0.3: 0;
+
+				if(!run){
+					return false;
+				}
+
+				geometry.faces.forEach(function(face, i){
+					var value = lerp( faces[i].travelTime['1881'], faces[i].travelTime['2016'], nowRelative );
+					geometry.faces[i].color.copy(getColor(value));
+				});
+
+			}
+
 
 			geometry.colorsNeedUpdate = true;
 
@@ -65,10 +85,7 @@ window.Heatmap = function(world){
 	});
 
 	this.show = function(_run){
-
 		run = _run
-		material.opacity = run ? 0.3: 0;
-
 	};
 
 
