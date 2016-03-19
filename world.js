@@ -70,10 +70,13 @@ window.World = function(){
 
 		//create lightning
 		var light = new THREE.HemisphereLight( 0xffffff, 0xdddddd, 0.5 );
-		var directLight = new THREE.PointLight( 0xffffff, 1, 120 );
-		directLight.position.set( 0, 50, -50 );
+		var directLight = new THREE.PointLight( 0xffffff, 1, 100 );
+		var directLight2 = new THREE.PointLight( 0xffffff, 1, 100 );
+		directLight.position.set( 0, 50, 0 );
+		directLight2.position.set( 0, -50, 0 );
 		this.scene.add(light);
 		this.scene.add(directLight);
+		this.scene.add(directLight2);
 
 		window._geom = geometry;
 		window._radius = this.radius;
