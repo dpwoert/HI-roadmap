@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "node-hgt": "^1.2.0",
-    "turf": "^2.0.2"
+    "turf": "^2.0.2",
+    "dank-csv": "^1.0.0"
   }
 }

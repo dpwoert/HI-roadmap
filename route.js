@@ -126,13 +126,18 @@
 			var point = tools.degreeToVec3(lat, lon, 0.35, world.radius);
 			points.push( point );
 
-			labelOffset = labelOffset || 0.1;
+			if(label){
 
-			var labelPos = new THREE.Vector3(0,0,0).lerp(point, 1 + labelOffset);
-			var _label = createLabel(label, labelPos);
+				labelOffset = labelOffset || 0.1;
 
-			meshes.push(_label);
-			world.rotated.add(_label);
+				var labelPos = new THREE.Vector3(0,0,0).lerp(point, 1 + labelOffset);
+				var _label = createLabel(label, labelPos);
+
+				meshes.push(_label);
+				world.rotated.add(_label);
+
+			}
+
 
 			//chainable
 			return this;

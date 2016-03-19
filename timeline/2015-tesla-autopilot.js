@@ -4,8 +4,8 @@
 	var route;
 
 	evt
-		.setDate(1,5,2010)
-		.marker('Uber beta starts', 'cars')
+		.setDate(1,1,2015)
+		.marker('Tesla Autopilot', 'cars')
 		.onActive(function(world){
 
 			//add test route
@@ -13,7 +13,7 @@
 
 			//create points
 			route
-				.addPoint(37.774929, -122.419416, 'San Francisco')
+				.addPoint(37.441883, -122.143019, 'Palo Alto')
 				.build('cars');
 
 		})

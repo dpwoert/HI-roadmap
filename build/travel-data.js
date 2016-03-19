@@ -1,10 +1,13 @@
 var fs = require('fs');
 var turf = require('turf');
+var csv = require('dank-csv');
 
 //get JSON object from data file
 var points = fs.readFileSync(__dirname + '/../data/faces.json');
 var world = fs.readFileSync(__dirname + '/../data/world.geojson');
+var uber = fs.readFileSync(__dirname + '/../data/uber.json');
 world = JSON.parse(world);
+uber = JSON.parse(uber);
 var WO1 = ['United States of America', 'Brazil', 'Belgium', 'France', 'Germany', 'Austria', 'Hungary', 'United Kingdom','China','Greece','Italy','Japan','Liberia','Montenegro','Turkey','Russia','Portugal','Romania','Serbia','Thailand','Bulgaria','Ukraine','Belarus','Estonia','Latvia','Lithuania','Belarus','Poland','Croatia','Serbia','India','Pakistan','Bangladesh','Canada','Bulgaria','Slovakia','Czech Republic','Romania','Slovenia','Australia','Ireland','Canada'];
 var WO2 = ['Spain','Portugal','Switzerland','Sweden','Mozambique','Angola','Afganistan','Tibet'];
 var Oil = ['Netherlands','United States of America','Japan','Canada','United Kingdom','Israel'];
@@ -72,6 +75,8 @@ var retrieve = function(year){
 
 retrieve(1881);
 retrieve(2016);
+
+console.log(csv);
 
 //clean
 points.forEach(function(point){

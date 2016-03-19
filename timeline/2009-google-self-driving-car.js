@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(1,5,2010)
-		.marker('Uber beta starts', 'cars')
+		.marker('Google starts self driving car programme', 'cars')
 		.onActive(function(world){
 
 			//add test route
@@ -13,7 +13,7 @@
 
 			//create points
 			route
-				.addPoint(37.774929, -122.419416, 'San Francisco')
+				.addPoint(37.386052, -122.083851, 'Mountain View')
 				.build('cars');
 
 		})
