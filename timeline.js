@@ -113,8 +113,8 @@ window.Timeline = function(world){
 
 	this.tick = function(){
 		list.forEach(function(evt){
-			if(evt.active){
-				evt.handles.update(now)
+			if(evt.active && evt.handles.onUpdate){
+				evt.handles.onUpdate(now)
 			}
 		});
 	};
