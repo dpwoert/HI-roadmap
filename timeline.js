@@ -2,7 +2,7 @@ window.Timeline = function(world){
 
 	var list = [];
 	var bounds = {min: undefined, max: undefined};
-	var pxBounds = [100, 3000];
+	var pxBounds = [100, 4000];
 	var now = [];
 	var grippy, grippy2;
 	var scale;

@@ -144,14 +144,15 @@
 
 		}
 
-		this.build = function(type){
+		this.build = function(type, quality){
 
 			type = type || 'driver';
+			quality = quality || 30;
 
 			//create lines
 			curves.forEach(function(curve){
 
-				var allPoints = curve.getPoints(30);
+				var allPoints = curve.getPoints(quality);
 				var geometry = new THREE.Geometry();
 				geometry.vertices = allPoints;
 				geometry.verticesNeedUpdate = true;

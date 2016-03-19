@@ -4,8 +4,8 @@
 	var route;
 
 	evt
-		.setDate(1,6,2008)
-		.marker('Tesla Roadstar', 'driver')
+		.setDate(1,1,2028)
+		.marker('First Hyperloop track', 'rail')
 		.onActive(function(world){
 
 			//add test route
@@ -13,8 +13,9 @@
 
 			//create points
 			route
-				.addPoint(37.441883, -122.143019, 'Palo Alto')
-				.build('driver');
+				.add(37.774929, -122.419416, undefined, 'San Francisco', 0.15)
+				.add(34.052234, -118.243685, 1, 'Los Angeles')
+				.build('rail');
 
 		})
 		.onLeave(function(){

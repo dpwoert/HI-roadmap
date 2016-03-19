@@ -4,8 +4,8 @@
 	var route;
 
 	evt
-		.setDate(1,1,2022)
-		.marker('Trips to space', 'space')
+		.setDate(1,1,2040)
+		.marker('Spaceliner suborbital lineflights', 'space')
 		.onActive(function(world){
 
 			//add test route
@@ -13,9 +13,9 @@
 
 			//create points
 			route
-				.add(37.774929, -122.419416, undefined, 'San Francisco')
-				.add(40.712784, -74.005941, 2, 'New york')
-				.build('aviation');
+				.add(51.507351, -0.127758, undefined, 'London')
+				.add(-33.867487, 151.20699, 200, 'Sydney')
+				.build('space');
 
 		})
 		.onLeave(function(){

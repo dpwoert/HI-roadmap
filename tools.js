@@ -5,14 +5,14 @@ window.tools = {
 		lat = THREE.Math.degToRad(lat);
 		lon = THREE.Math.degToRad(0-lon);
 
-		// rad = np.float64(6378137.0)        # Radius of the Earth (in meters)
+		// rad = np.float64(6378137.0)		# Radius of the Earth (in meters)
 		var f = 1.0/298.257223563;  //Flattening factor WGS84 Model
 		// alt = rad;
 		var cosLat = Math.cos(lat);
 		var sinLat = Math.sin(lat);
-		var FF     = Math.pow((1.0-f),2);
-		var C      = 1/Math.sqrt(Math.pow(cosLat,2) + FF * Math.pow(sinLat,2));
-		var S      = C * FF;
+		var FF	 = Math.pow((1.0-f),2);
+		var C	  = 1/Math.sqrt(Math.pow(cosLat,2) + FF * Math.pow(sinLat,2));
+		var S	  = C * FF;
 
 		var x = (rad * C + alt)*cosLat * Math.cos(lon);
 		var y = (rad * C + alt)*cosLat * Math.sin(lon);
@@ -34,9 +34,43 @@ window.tools = {
 		};
 	},
 
+	distance: function(from, to, unit){
+
+		//http://stackoverflow.com/questions/639695/how-to-convert-latitude-or-longitude-to-meters
+		var R = 6378.137; // Radius of earth in KM
+		var dLat = (to[1] - from[1]) * Math.PI / 180;
+		var dLon = (to[0] - from[1]) * Math.PI / 180;
+		var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+		Math.cos(from[0] * Math.PI / 180) * Math.cos(to[1] * Math.PI / 180) *
+		Math.sin(dLon/2) * Math.sin(dLon/2);
+		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+		var d = R * c;
+
+		switch(unit){
+
+			//nautical miles
+			case 'nm':
+			case 'nmi':
+				return d * 0.539956803;
+
+			//km
+			case 'km':
+				return d;
+
+			//meters
+			case 'm':
+			default:
+				return d*1000;
+
+		}
+
+		// return d * 1000; // meters
+
+	},
+
 	getDate: function(date){
 
-		
+
 	}
 
 

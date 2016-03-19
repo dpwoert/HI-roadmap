@@ -13,6 +13,22 @@
 		'Brisbane'
 	];
 
+	var scale = d3.scale.pow().exponent(2).domain([1000,20000]).range([0.1, 100]);
+
+	var loader = new THREE.XHRLoader();
+	var load = function(cb){
+		loader.load('data/uber.json', function (res) {
+			var points = JSON.parse( res );
+			cache = points;
+
+			if(cb){
+				cb(cache);
+			}
+		});
+	};
+
+	load();
+
 	evt
 		.setDate(1,1,2021)
 		.marker('Uber starts connecting hubs', 'driver')
@@ -24,7 +40,7 @@
 			//create points
 			var addPoints = function(points){
 
-				points.forEach(function(point){
+				points.forEach(function(point, key){
 
 					var cityName = cities.indexOf(point.city) > -1 ? point.city : undefined;
 
@@ -34,30 +50,25 @@
 							cityName = undefined;
 						}
 
-						var point2 = points[Math.floor(Math.random()*points.length)];
+						var point2 = points[Math.floor(Math.random() * points.length)];
+						var dist = window.tools.distance([point.longitude, point.latitude],[point2.longitude, point2.latitude],'km');
+						var height = scale(dist);
 
 						route
 							.add(point.latitude, point.longitude, undefined, cityName)
-							.add(point2.latitude, point2.longitude, 2);
+							.add(point2.latitude, point2.longitude, height);
 
 					}
 
 
 				});
 
-				route.build('driver');
+				route.build('driver', 10);
 
 			};
 
 			if(!cache){
-
-				var loader = new THREE.XHRLoader();
-				loader.load('data/uber.json', function (res) {
-					var points = JSON.parse( res );
-					cache = points;
-					addPoints(cache);
-				});
-
+				load(addPoints);
 			} else {
 				addPoints(cache);
 			}

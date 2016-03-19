@@ -4,7 +4,7 @@
 	var route;
 
 	evt
-		.setDate(1,5,2010)
+		.setDate(1,3,2010)
 		.marker('Google starts self driving car programme', 'cars')
 		.onActive(function(world){
 
