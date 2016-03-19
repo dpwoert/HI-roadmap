@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(18,11,1869)
-		.marker('Suez canal', 'driver')
+		.marker('Suez canal', 'driver', '.timeline__content--suez-canal')
 		.onActive(function(world){
 
 			//add test route
