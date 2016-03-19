@@ -4,7 +4,6 @@ window.Timeline = function(world){
 	var bounds = {min: undefined, max: undefined};
 	var pxBounds = [100, 4000];
 	var now = [];
-	var grippy, grippy2;
 	var scale;
 	var group;
 	var tweenable = new Tweenable();
@@ -138,12 +137,6 @@ window.Timeline = function(world){
 		//save current date
 		now = date;
 
-		//move grippy
-		grippy
-			.transition()
-			.duration(200)
-			// .attr('cy', getPosition(date));
-
 		//set active for events
 		list.forEach(function(evt){
 			var active = (evt.date[0] === now[0] && evt.date[1] === now[1] && evt.date[2] === now[2]);
@@ -176,16 +169,12 @@ window.Timeline = function(world){
 		mode = _mode;
 
 		if(mode === 0){
-			grippy.attr('display', 'none');
-			document.querySelector('.timeline--fixed').style.display = 'block';
 			document.querySelector('.timeline__content__wrapper').style.opacity = 1;
 
 			world.heatmap.show(false);
 
 		}
 		else{
-			grippy.attr('display', 'block');
-			document.querySelector('.timeline--fixed').style.display = 'none';
 			document.querySelector('.timeline__content__wrapper').style.opacity = 0;
 
 			d3
@@ -329,36 +318,6 @@ window.Timeline = function(world){
 
 		});
 
-		//grippy
-		var clicked = false;
-		grippy = group
-			.append('circle')
-			.attr('class', 'timeline__grippy')
-			.attr('r', 6)
-			.attr('cx', left)
-			.attr('cy', pxBounds[0])
-			.attr('fill', '#ff0000')
-			.attr('stroke', 'none')
-			.on('mousedown', function(){
-				clicked = true;
-			})
-			.on('mouseup', function(){
-				clicked = false;
-			});
-
-		svg
-			.on('mousemove', function(evt){
-
-				//update grippy position when clicked
-				if(clicked){
-					var position = d3.mouse(this)[1];
-					position = position < pxBounds[0] ? pxBounds[0] : position;
-					position = position > pxBounds[1] ? pxBounds[1] : position;
-					grippy.attr('cy', position);
-				}
-
-			});
-
 		//set to first marker
 		this.setMarker(list[0]);
 		this.switchMode(0);
@@ -370,10 +329,6 @@ window.Timeline = function(world){
 		document
 			.querySelector('.timeline__wrapper')
 			.addEventListener('scroll', function(event){
-
-				if(mode === 1){
-					return false;
-				}
 
 				var scrollPos = event.target.scrollTop + 100;
 
