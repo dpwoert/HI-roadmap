@@ -115,7 +115,7 @@
     "longitude":-91.665623
   },
   {
-    "city":"Centraal Atlantische kust, FL",
+    "city":"Central Atlantic Coast, FL",
     "latitude":27.664827,
     "longitude":-81.515754
   },
@@ -225,6 +225,16 @@
     "longitude":-83.045754
   },
   {
+    "city":"Eastern Idaho",
+    "latitude":42.581336,
+    "longitude":-114.136883
+  },
+  {
+    "city":"Eastern North Carolina",
+    "latitude":35.031742,
+    "longitude":-78.878954
+  },
+  {
     "city":"Edmonton",
     "latitude":53.544389,
     "longitude":-113.490927
@@ -288,11 +298,6 @@
     "city":"Gainesville",
     "latitude":29.651634,
     "longitude":-82.324826
-  },
-  {
-    "city":"Gebied rond San Francisco Bay",
-    "latitude":null,
-    "longitude":null
   },
   {
     "city":"Georgia Coast",
@@ -630,16 +635,6 @@
     "longitude":-95.997988
   },
   {
-    "city":"Oostelijk Idaho",
-    "latitude":44.068202,
-    "longitude":-114.742041
-  },
-  {
-    "city":"Oostelijk Noord Carolina",
-    "latitude":null,
-    "longitude":null
-  },
-  {
     "city":"Orange County",
     "latitude":33.717471,
     "longitude":-117.831143
@@ -675,7 +670,7 @@
     "longitude":-87.216915
   },
   {
-    "city":"Peoria en Bloomington-Normal",
+    "city":"Peoria & Bloomington-Normal",
     "latitude":40.693649,
     "longitude":-89.588986
   },
@@ -715,9 +710,9 @@
     "longitude":-98.2062
   },
   {
-    "city":"Quad-steden",
-    "latitude":null,
-    "longitude":null
+    "city":"Quad Cities",
+    "latitude":40.890021,
+    "longitude":-73.901674
   },
   {
     "city":"Quebec City",
@@ -783,6 +778,11 @@
     "city":"San Diego",
     "latitude":32.715738,
     "longitude":-117.161084
+  },
+  {
+    "city":"San Francisco Bay Area",
+    "latitude":37.827178,
+    "longitude":-122.291308
   },
   {
     "city":"San Luis Obispo",
@@ -910,7 +910,7 @@
     "longitude":-87.569173
   },
   {
-    "city":"Vancouver, Wa",
+    "city":"Vancouver, WA",
     "latitude":45.638728,
     "longitude":-122.661486
   },
@@ -1105,6 +1105,356 @@
     "longitude":-73.63769
   },
   {
+    "city":"Amsterdam",
+    "latitude":52.370216,
+    "longitude":4.895168
+  },
+  {
+    "city":"Athens, GR",
+    "latitude":37.983917,
+    "longitude":23.72936
+  },
+  {
+    "city":"Basel",
+    "latitude":47.559599,
+    "longitude":7.588576
+  },
+  {
+    "city":"Belfast",
+    "latitude":54.597285,
+    "longitude":-5.93012
+  },
+  {
+    "city":"Berlin",
+    "latitude":52.520007,
+    "longitude":13.404954
+  },
+  {
+    "city":"Birmingham, UK",
+    "latitude":52.486243,
+    "longitude":-1.890401
+  },
+  {
+    "city":"Bordeaux",
+    "latitude":44.837789,
+    "longitude":-0.57918
+  },
+  {
+    "city":"Bratislava",
+    "latitude":48.148597,
+    "longitude":17.107748
+  },
+  {
+    "city":"Bristol",
+    "latitude":51.454513,
+    "longitude":-2.58791
+  },
+  {
+    "city":"Brussels",
+    "latitude":50.85034,
+    "longitude":4.35171
+  },
+  {
+    "city":"Bucharest",
+    "latitude":44.426767,
+    "longitude":26.102538
+  },
+  {
+    "city":"Budapest",
+    "latitude":47.497912,
+    "longitude":19.040235
+  },
+  {
+    "city":"Copenhagen",
+    "latitude":55.676097,
+    "longitude":12.568337
+  },
+  {
+    "city":"Dublin",
+    "latitude":53.349805,
+    "longitude":-6.26031
+  },
+  {
+    "city":"Edinburgh",
+    "latitude":55.953252,
+    "longitude":-3.188267
+  },
+  {
+    "city":"Ekaterinburg",
+    "latitude":56.838926,
+    "longitude":60.605703
+  },
+  {
+    "city":"Florence",
+    "latitude":43.76956,
+    "longitude":11.255814
+  },
+  {
+    "city":"Geneva",
+    "latitude":46.204391,
+    "longitude":6.143158
+  },
+  {
+    "city":"Genoa",
+    "latitude":44.40565,
+    "longitude":8.946256
+  },
+  {
+    "city":"Glasgow",
+    "latitude":55.864237,
+    "longitude":-4.251806
+  },
+  {
+    "city":"Gothenburg",
+    "latitude":57.70887,
+    "longitude":11.97456
+  },
+  {
+    "city":"Helsinki",
+    "latitude":60.169856,
+    "longitude":24.938379
+  },
+  {
+    "city":"Istanbul",
+    "latitude":41.008238,
+    "longitude":28.978359
+  },
+  {
+    "city":"Kazan",
+    "latitude":55.830431,
+    "longitude":49.066081
+  },
+  {
+    "city":"Krakow",
+    "latitude":50.06465,
+    "longitude":19.94498
+  },
+  {
+    "city":"Krasnodar",
+    "latitude":45.039267,
+    "longitude":38.987221
+  },
+  {
+    "city":"Lausanne",
+    "latitude":46.519654,
+    "longitude":6.632273
+  },
+  {
+    "city":"Leeds",
+    "latitude":53.800755,
+    "longitude":-1.549077
+  },
+  {
+    "city":"Leicester",
+    "latitude":52.636878,
+    "longitude":-1.139759
+  },
+  {
+    "city":"Lille",
+    "latitude":50.62925,
+    "longitude":3.057256
+  },
+  {
+    "city":"Lisbon",
+    "latitude":38.722252,
+    "longitude":-9.139337
+  },
+  {
+    "city":"London",
+    "latitude":51.507351,
+    "longitude":-0.127758
+  },
+  {
+    "city":"Lyon",
+    "latitude":45.764043,
+    "longitude":4.835659
+  },
+  {
+    "city":"Malmö",
+    "latitude":55.604981,
+    "longitude":13.003822
+  },
+  {
+    "city":"Manchester",
+    "latitude":53.480759,
+    "longitude":-2.242631
+  },
+  {
+    "city":"Marseille",
+    "latitude":43.296482,
+    "longitude":5.36978
+  },
+  {
+    "city":"Merseyside",
+    "latitude":53.397604,
+    "longitude":-2.943664
+  },
+  {
+    "city":"Milan",
+    "latitude":45.465422,
+    "longitude":9.185924
+  },
+  {
+    "city":"Minsk",
+    "latitude":53.90454,
+    "longitude":27.561524
+  },
+  {
+    "city":"Moscow",
+    "latitude":55.755826,
+    "longitude":37.6173
+  },
+  {
+    "city":"Munich",
+    "latitude":48.135125,
+    "longitude":11.581981
+  },
+  {
+    "city":"Nantes",
+    "latitude":47.218371,
+    "longitude":-1.553621
+  },
+  {
+    "city":"Newcastle",
+    "latitude":54.978252,
+    "longitude":-1.61778
+  },
+  {
+    "city":"Nice",
+    "latitude":43.710173,
+    "longitude":7.261953
+  },
+  {
+    "city":"Nottingham",
+    "latitude":52.954783,
+    "longitude":-1.158109
+  },
+  {
+    "city":"Novosibirsk",
+    "latitude":55.008353,
+    "longitude":82.935733
+  },
+  {
+    "city":"Oslo",
+    "latitude":59.913869,
+    "longitude":10.752245
+  },
+  {
+    "city":"Paris",
+    "latitude":48.856614,
+    "longitude":2.352222
+  },
+  {
+    "city":"Porto",
+    "latitude":41.157944,
+    "longitude":-8.629105
+  },
+  {
+    "city":"Portsmouth",
+    "latitude":50.819768,
+    "longitude":-1.087977
+  },
+  {
+    "city":"Poznan",
+    "latitude":52.406374,
+    "longitude":16.925168
+  },
+  {
+    "city":"Prague",
+    "latitude":50.075538,
+    "longitude":14.4378
+  },
+  {
+    "city":"Rome",
+    "latitude":41.902784,
+    "longitude":12.496366
+  },
+  {
+    "city":"Rostov-On-Don",
+    "latitude":47.235714,
+    "longitude":39.701505
+  },
+  {
+    "city":"Rotterdam",
+    "latitude":51.92442,
+    "longitude":4.477733
+  },
+  {
+    "city":"Saint Petersburg",
+    "latitude":27.751828,
+    "longitude":-82.626734
+  },
+  {
+    "city":"Sheffield",
+    "latitude":53.381129,
+    "longitude":-1.470085
+  },
+  {
+    "city":"Sochi",
+    "latitude":43.602808,
+    "longitude":39.734154
+  },
+  {
+    "city":"Sofia",
+    "latitude":42.697708,
+    "longitude":23.321868
+  },
+  {
+    "city":"Stockholm",
+    "latitude":59.329323,
+    "longitude":18.068581
+  },
+  {
+    "city":"Strasbourg",
+    "latitude":48.573405,
+    "longitude":7.752111
+  },
+  {
+    "city":"Tallinn",
+    "latitude":59.436961,
+    "longitude":24.753575
+  },
+  {
+    "city":"Toulouse",
+    "latitude":43.604652,
+    "longitude":1.444209
+  },
+  {
+    "city":"Trojmiasto",
+    "latitude":54.5958,
+    "longitude":18.3292
+  },
+  {
+    "city":"Vienna",
+    "latitude":48.208174,
+    "longitude":16.373819
+  },
+  {
+    "city":"Vilnius",
+    "latitude":54.687156,
+    "longitude":25.279651
+  },
+  {
+    "city":"Warsaw",
+    "latitude":52.229676,
+    "longitude":21.012229
+  },
+  {
+    "city":"Wroclaw",
+    "latitude":51.107885,
+    "longitude":17.038538
+  },
+  {
+    "city":"Zagreb",
+    "latitude":45.815011,
+    "longitude":15.981919
+  },
+  {
+    "city":"Zurich",
+    "latitude":47.376887,
+    "longitude":8.541694
+  },
+  {
     "city":"Abu Dhabi",
     "latitude":24.299174,
     "longitude":54.697277
@@ -1120,7 +1470,7 @@
     "longitude":49.867092
   },
   {
-    "city":"Beiroet",
+    "city":"Beirut",
     "latitude":33.888629,
     "longitude":35.495479
   },
@@ -1150,7 +1500,7 @@
     "longitude":50.58605
   },
   {
-    "city":"Riaad",
+    "city":"Riyadh",
     "latitude":24.713552,
     "longitude":46.675296
   },
@@ -1165,14 +1515,19 @@
     "longitude":-77.046921
   },
   {
+    "city":"Cairo",
+    "latitude":30.04442,
+    "longitude":31.235712
+  },
+  {
+    "city":"Cape Town",
+    "latitude":-33.924868,
+    "longitude":18.424055
+  },
+  {
     "city":"Casablanca",
     "latitude":33.57311,
     "longitude":-7.589843
-  },
-  {
-    "city":"Caïro",
-    "latitude":30.04442,
-    "longitude":31.235712
   },
   {
     "city":"Durban",
@@ -1183,11 +1538,6 @@
     "city":"Johannesburg",
     "latitude":-26.204103,
     "longitude":28.047305
-  },
-  {
-    "city":"Kaapstad",
-    "latitude":-33.924868,
-    "longitude":18.424055
   },
   {
     "city":"Lagos",
@@ -1295,7 +1645,7 @@
     "longitude":120.382609
   },
   {
-    "city":"Seoel",
+    "city":"Seoul",
     "latitude":37.566535,
     "longitude":126.977969
   },
@@ -1330,7 +1680,7 @@
     "longitude":117.200983
   },
   {
-    "city":"Tokio",
+    "city":"Tokyo",
     "latitude":35.689488,
     "longitude":139.691706
   },
@@ -1525,7 +1875,7 @@
     "longitude":105.83416
   },
   {
-    "city":"Ho Chi Minh Stad",
+    "city":"Ho Chi Minh City",
     "latitude":10.823099,
     "longitude":106.629664
   },

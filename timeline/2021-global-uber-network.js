@@ -5,15 +5,15 @@
 	var cities = [
 		'New York City', 'London','San Francisco','Berlin',
 		'Paris','Honolulu','Chicago','Miami','Sao Paolo',
-		'Rio De Janeiro','Santiago','Montevideo','Rome',
-		'Moskou','München','Tel Aviv','Dubai','Beirut',
+		'Rio De Janeiro','Montevideo','Rome',
+		'Moskou','München','Tel Aviv','Dubai',
 		'Nairobi','Lagos','Capetown','Johannesburg','Beijing',
 		'Hong Kong','Taipei','Tokyo','Shanghai','Sydney',
-		'Melbourne','Mumbai','New Delhi','Bangkok','Singapore',
-		'Brisbane'
+		'Mumbai','New Delhi','Bangkok','Singapore',
+		'Brisbane','Stockholm','Bogota','Panama','Mexico City'
 	];
 
-	var scale = d3.scale.pow().exponent(2).domain([1000,20000]).range([0.1, 100]);
+	var scale = d3.scale.linear().domain([5000,20000]).range([0.1, 75]);
 
 	var loader = new THREE.XHRLoader();
 	var load = function(cb){
@@ -44,7 +44,7 @@
 
 					var cityName = cities.indexOf(point.city) > -1 ? point.city : undefined;
 
-					for(var i = 0 ; i < 2 ; i++){
+					for(var i = 0 ; i < 1 ; i++){
 
 						if(i > 0){
 							cityName = undefined;
@@ -54,16 +54,22 @@
 						var dist = window.tools.distance([point.longitude, point.latitude],[point2.longitude, point2.latitude],'km');
 						var height = scale(dist);
 
-						route
-							.add(point.latitude, point.longitude, undefined, cityName)
-							.add(point2.latitude, point2.longitude, height);
+						window.setTimeout(function(){
+
+							route
+							.add(this.point1.latitude, this.point1.longitude, undefined, cityName)
+							.add(this.point2.latitude, this.point2.longitude, height);
+
+							if(this.last){
+								route.build('driver', 10);
+							}
+
+						}.bind({ point1: point, point2: point2, last: key === points.length - 1 }), 0)
 
 					}
 
-
 				});
 
-				route.build('driver', 10);
 
 			};
 
