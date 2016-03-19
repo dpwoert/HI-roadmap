@@ -28,7 +28,7 @@
 
 					var cityName = cities.indexOf(point.city) > -1 ? point.city : undefined;
 
-					for(var i = 0 ; i < 3 ; i++){
+					for(var i = 0 ; i < 2 ; i++){
 
 						if(i > 0){
 							cityName = undefined;
