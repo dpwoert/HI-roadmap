@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(1,1,2040)
-		.marker('Spaceliner suborbital lineflights', 'space')
+		.marker('SpaceLiner suborbital lineflights', 'space')
 		.onActive(function(world){
 
 			//add test route
