@@ -41,6 +41,8 @@ html, body{
 	top: 0;
 	height: 200px;
 	width: 100%;
+
+	pointer-events: none;
 }
 
 .timeline__switch{
