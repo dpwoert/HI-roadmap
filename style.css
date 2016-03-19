@@ -61,7 +61,39 @@ html, body{
 }
 
 .timeline__scroll-down{
-	display: none;
+	position: fixed;
+	bottom: 0px;
+	width: 350px;
+	height: 50px;
+	text-align: center;
+
+	font-family: 'Avenir';
+	font-weight: bold;
+	font-size: 11px;
+	color: white;
+
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#161f26+0,161f26+100&0+0,1+100 */
+	background: -moz-linear-gradient(top,  rgba(22,31,38,0) 0%, rgba(22,31,38,1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  rgba(22,31,38,0) 0%,rgba(22,31,38,1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  rgba(22,31,38,0) 0%,rgba(22,31,38,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00161f26', endColorstr='#161f26',GradientType=0 ); /* IE6-9 */
+}
+
+.timeline__scroll-down__inner{
+	-webkit-transition: opacity 0.3s ease;
+	-moz-transition: opacity 0.3s ease;
+	transition: opacity 0.3s ease;
+	opacity: 1;
+}
+
+.timeline__scrolldown__arrow{
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	background: url(arrow.svg);
+	background-size: contain;
+	background-repeat: no-repeat;
+	margin-top: 4px;
 }
 
 .timeline__point{

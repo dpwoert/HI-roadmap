@@ -365,6 +365,8 @@ window.Timeline = function(world){
 
 		var self = this;
 
+		var message = document.querySelector('.timeline__scroll-down__inner');
+
 		document
 			.querySelector('.timeline__wrapper')
 			.addEventListener('scroll', function(event){
@@ -382,6 +384,12 @@ window.Timeline = function(world){
 					}
 
 				});
+
+				if(scrollPos > 100){
+					message.style.opacity = 0;
+				} else {
+					message.style.opacity = 1;
+				}
 
 			}.bind(this));
 
