@@ -8,11 +8,10 @@
 		.marker('First world war', 'driver')
 		.onActive(function(world){
 
-			
+
 
 		})
 		.onLeave(function(){
-			route.remove();
 		});
 
 }())

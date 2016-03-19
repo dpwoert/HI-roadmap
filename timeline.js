@@ -2,7 +2,7 @@ window.Timeline = function(world){
 
 	var list = [];
 	var bounds = {min: undefined, max: undefined};
-	var pxBounds = [100, 1500];
+	var pxBounds = [100, 2500];
 	var now = [];
 	var grippy, grippy2;
 	var scale;
@@ -52,7 +52,7 @@ window.Timeline = function(world){
 
 		} else {
 
-			var now = evt.date[2] + (evt.date[1] * 30 + evt.date[0]) / 356;
+			var now = evt.date[2] + ((evt.date[1]-1) * 30 + evt.date[0]) / 356;
 			return scale(now);
 
 		}
@@ -73,11 +73,11 @@ window.Timeline = function(world){
 
 		});
 
-		var min = bounds.min[2] + (bounds.min[1] * 30 + bounds.min[0]) / 356;
-		var max = bounds.max[2] + (bounds.max[1] * 30 + bounds.max[0]) / 356;
+		var min = bounds.min[2] + ((bounds.min[1] - 1) * 30 + bounds.min[0]) / 356;
+		var max = bounds.max[2] + ((bounds.max[1] - 1) * 30 + bounds.max[0]) / 356;
 
 		var extent = d3.extent(list, function(d){
-			return d.date[2] + (d.date[1] * 30 + d.date[0]) / 356;
+			return d.date[2] + ((d.date[1] - 1) * 30 + d.date[0]) / 356;
 		})
 
 		scale = d3.scale.linear().domain(extent).range(pxBounds);
@@ -167,23 +167,7 @@ window.Timeline = function(world){
 
 		});
 
-		// Tweenable.stop();
-		// console.log(oldDate);
-		// console.log(now);
-		tweenable.tween({
-			from: { date: oldDate[2] + (oldDate[1] * 30 + oldDate[0]) / 356 },
-			to: { date: now[2] + (now[1] * 30 + now[0]) / 356 },
-			duration: 1500,
-			easing: 'easeOutQuad',
-			step: function(state){
-				this.now = state.date;
-			}.bind(this),
-		  finish: function () {
-				this.now = now[2] + (now[1] * 30 + now[0]) / 356;
-			}.bind(this)
-		});
-
-		// this.now = now[2] + (now[1] * 30 + now[0]) / 356;
+		this.now = now[2] + (now[1] * 30 + now[0]) / 356;
 		this._now = now;
 
 	};
@@ -243,9 +227,10 @@ window.Timeline = function(world){
 
 		//order on date
 		list.sort(function(a, b){
-			a = a.date[2] + (a.date[1] * 30 + a.date[0]) / 356;
-			b = b.date[2] + (b.date[1] * 30 + b.date[0]) / 356;
-			return a > b;
+			a = a.date[2] + ((a.date[1]-1) * 30 + a.date[0]) / 365;
+			b = b.date[2] + ((b.date[1]-1) * 30 + b.date[0]) / 365;
+
+			return a > b ? 1 : -1;
 		});
 
 		var self = this;

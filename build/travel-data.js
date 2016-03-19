@@ -5,7 +5,10 @@ var turf = require('turf');
 var points = fs.readFileSync(__dirname + '/../data/faces.json');
 var world = fs.readFileSync(__dirname + '/../data/world.geojson');
 world = JSON.parse(world);
-var WO1 = ['United States of America', 'Brazil', 'Belgium', 'France', 'Germany', 'Austria', 'Hungary', 'United Kingdom','China','Greece','Italy','Japan','Liberia','Montenegro','Turkey','Russia','Portugal','Romania','Serbia','Thailand','Bulgaria','Ukraine','Belarus','Estonia','Latvia','Lithuania','Belarus','Poland'];
+var WO1 = ['United States of America', 'Brazil', 'Belgium', 'France', 'Germany', 'Austria', 'Hungary', 'United Kingdom','China','Greece','Italy','Japan','Liberia','Montenegro','Turkey','Russia','Portugal','Romania','Serbia','Thailand','Bulgaria','Ukraine','Belarus','Estonia','Latvia','Lithuania','Belarus','Poland','Croatia','Serbia','India','Pakistan','Bangladesh','Canada','Bulgaria','Slovakia','Czech Republic','Romania','Slovenia','Australia','Ireland','Canada'];
+var WO2 = ['Spain','Portugal','Switzerland','Sweden','Mozambique','Angola','Afganistan','Tibet'];
+var Oil = ['Netherlands','United States of America','Japan','Canada','United Kingdom','Israel'];
+var Oil2 = ['Egypt','Syria','Algeria','Bahrein','United Arab Immirates','Iraq','Kuweit','Libya','Qatar','Tunesia','Saudi Arabia'];
 
 points = JSON.parse(points);
 var retrieve = function(year){
@@ -78,6 +81,20 @@ points.forEach(function(point){
 		if(turf.inside(point._center, feature) && WO1.indexOf(feature.properties.name) > -1){
 			point.WO1 = true;
 			console.log('involved in war war 1: ', feature.properties.name);
+		}
+
+		if(turf.inside(point._center, feature) && WO2.indexOf(feature.properties.name) === -1){
+			point.WO2 = true;
+			console.log('involved in war war 2: ', feature.properties.name);
+		}
+
+		if(turf.inside(point._center, feature) && Oil.indexOf(feature.properties.name) > -1){
+			point.oil = true;
+			console.log('involved in oil crisis: ', feature.properties.name);
+		}
+		if(turf.inside(point._center, feature) && Oil2.indexOf(feature.properties.name) > -1){
+			point.oil2 = true;
+			console.log('involved in oil crisis: ', feature.properties.name);
 		}
 
 	});

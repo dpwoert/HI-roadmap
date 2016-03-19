@@ -32,6 +32,12 @@ window.tools = {
 			lat: 90 - (Math.acos(vec3.y / radius)) * 180 / Math.PI,
 			lon: ((270 + (Math.atan2(vec3.x , vec3.z)) * 180 / Math.PI) % 360) - 180
 		};
+	},
+
+	getDate: function(date){
+
+		
 	}
+
 
 };

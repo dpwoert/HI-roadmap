@@ -62,6 +62,32 @@ window.Heatmap = function(world){
 				material.opacity = 0.3;
 
 			}
+			else if(now > 1939 && now < 1945){
+
+				geometry.faces.forEach(function(face, i){
+					var war = faces[i].WO2;
+					// war = Math.random() > 0.5;
+					var color = war ? window.colors.driver : window.colors.empty;
+					geometry.faces[i].color.copy(color);
+				});
+
+				material.opacity = 0.3;
+
+			}
+			else if(now > 1973 && now < 1974){
+
+				geometry.faces.forEach(function(face, i){
+					var oil = faces[i].oil;
+					var oil2 = faces[i].oil2;
+					// war = Math.random() > 0.5;
+					var color = oil ? window.colors.driver : window.colors.empty;
+					color = oil2 ? window.colors.rail : color;
+					geometry.faces[i].color.copy(color);
+				});
+
+				material.opacity = 0.3;
+
+			}
 			else {
 
 				material.opacity = run ? 0.3: 0;
