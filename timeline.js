@@ -312,6 +312,8 @@ window.Timeline = function(world){
 				content = document.querySelector(content);
 				content.style.top = getPosition(evt, i) + 'px';
 				bottom += content.offsetHeight;
+
+				content.classList.add('timeline__content--' + evt.marker().type);
 			}
 
 			evt.scrollBox = [top, bottom];

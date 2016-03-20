@@ -155,6 +155,29 @@ html, body{
 	font-family: 'Avenir';
 }
 
+.timeline__content--driver .number{
+	color: #ff0000;
+}
+.timeline__content--marine .number{
+	color: #15D2B6;
+}
+.timeline__content--aviation .number{
+	color: #0094FF;
+}
+.timeline__content--rail .number{
+	color: #ebe815;
+}
+.timeline__content--cars .number{
+	color: #e643bd;
+}
+.timeline__content--space .number{
+	color: rgb(181,0, 255);
+}
+
 .timeline__content--active{
 	color: #eee;
+}
+
+.cite{
+	color: #585858;
 }
