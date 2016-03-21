@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(20,9,1906)
-		.marker('First oceanliner with steam turbine', 'marine')
+		.marker('First oceanliner with steam turbine', 'marine','.timeline__content--steam-turbine')
 		.onActive(function(world){
 
 			//add test route

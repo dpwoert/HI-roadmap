@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(1,10,1908)
-		.marker('Ford Model T', 'cars')
+		.marker('Ford Model T', 'cars','.timeline__content--model-t')
 		.onActive(function(world){
 
 			//add test route

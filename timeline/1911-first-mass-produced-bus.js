@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(1,1,1911)
-		.marker('first mass produced bus', 'cars')
+		.marker('first mass produced bus', 'cars','.timeline__content--bus')
 		.onActive(function(world){
 
 			//add test route

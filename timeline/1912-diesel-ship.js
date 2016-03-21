@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(1,2,1912)
-		.marker('First diesel oceanliner', 'marine')
+		.marker('First diesel oceanliner', 'marine','.timeline__diesel-ship')
 		.onActive(function(world){
 
 			//add test route

@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(1,11,1884)
-		.marker('Last big steamschip with auxiliary sails', 'marine')
+		.marker('Last big steamschip with auxiliary sails', 'marine','.timeline__content--auxiliary-sails')
 		.onActive(function(world){
 
 			//add test route

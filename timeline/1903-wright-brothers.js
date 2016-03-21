@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(17,12,1903)
-		.marker('First flight by Wright brothers', 'aviation')
+		.marker('First flight by Wright brothers', 'aviation', '.timeline__content--wright-brothers')
 		.onActive(function(world){
 
 			//add test route
