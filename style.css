@@ -16,6 +16,7 @@ html, body{
 	top: 0;
 	right: 0;
 	bottom: 0;
+	cursor: none;
 }
 
 .timeline__wrapper{
@@ -54,6 +55,8 @@ html, body{
 	background: black;
 	border-radius: 16px;
 	z-index: 99;
+
+	opacity: 0;
 }
 
 .timeline__content__wrapper{

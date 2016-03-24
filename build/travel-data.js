@@ -12,7 +12,7 @@ var WO1 = ['United States of America', 'Brazil', 'Belgium', 'France', 'Germany',
 var WO2 = ['Spain','Portugal','Switzerland','Sweden','Mozambique','Angola','Afganistan','Tibet'];
 var Oil = ['Netherlands','United States of America','Japan','Canada','United Kingdom','Israel'];
 var Oil2 = ['Egypt','Syria','Algeria','Bahrein','United Arab Immirates','Iraq','Kuweit','Libya','Qatar','Tunesia','Saudi Arabia'];
-var Oil3 = ['Saudi Arabia','Venezuela','Russia','Nigeria','United States of America','Mexico'];
+var Oil3 = ['Saudi Arabia','Venezuela','Russia','Nigeria','United States of America','Mexico','Iraq'];
 
 points = JSON.parse(points);
 var retrieve = function(year){

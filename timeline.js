@@ -9,6 +9,9 @@ window.Timeline = function(world){
 	var group;
 	var tweenable = new Tweenable();
 	var mode = 0;
+	var play = false;
+	var playRange;
+	var timelineEl;
 
 	var relateDate = function(date, date2){
 		if(date[2] < date2[2]){
@@ -117,6 +120,10 @@ window.Timeline = function(world){
 				evt.handles.onUpdate(now)
 			}
 		});
+
+		if(play){
+			timelineEl.scrollTop = playRange( +Date.now() );
+		}
 	};
 
 	this.setMarker = function(evt){
@@ -357,6 +364,19 @@ window.Timeline = function(world){
 			.addEventListener('click', function(event){
 				self.switchMode(mode === 0 ? 1 : 0)
 			});
+
+		window.addEventListener('keydown', function(event){
+
+			if(event.keyCode === 80){
+				var start = +Date.now();
+				var end = start + (1000 * 60) * 9;
+				playRange = d3.scale.linear().domain([ start, end ]).range([0,13000]);
+				play = true;
+
+				timelineEl = document.querySelector('.timeline__wrapper')
+			}
+
+		});
 
 	};
 
