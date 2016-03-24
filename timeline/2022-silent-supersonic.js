@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(1,1,2022)
-		.marker('Silent supersonic commercial aviation', 'aviation')
+		.marker('Silent supersonic commercial aviation', 'aviation', '.timeline__silent-supersonic')
 		.onActive(function(world){
 
 			//add test route

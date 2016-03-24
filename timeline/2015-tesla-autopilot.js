@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(1,1,2015)
-		.marker('Tesla Autopilot', 'cars')
+		.marker('Tesla Autopilot', 'cars', '.timeline__tesla-autopilot')
 		.onActive(function(world){
 
 			//add test route

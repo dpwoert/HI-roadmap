@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(14,11,1994)
-		.marker('First eurostar train through Chanel Tunnel', 'rail')
+		.marker('First eurostar train through Chanel Tunnel', 'rail', '.timeline__eurostar')
 		.onActive(function(world){
 
 			//add test route

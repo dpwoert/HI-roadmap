@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(1,10,1973)
-		.marker('Oil crisis', 'driver')
+		.marker('Oil crisis', 'driver', '.timeline__oil-cris-1973')
 		.onActive(function(world){
 
 			//add test route

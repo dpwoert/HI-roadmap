@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(26,11,2003)
-		.marker('End of supersonic commercial aviation', 'aviation')
+		.marker('End of supersonic commercial aviation', 'aviation', '.timeline__end-of-supersonic-aviation')
 		.onActive(function(world){
 
 			//add test route

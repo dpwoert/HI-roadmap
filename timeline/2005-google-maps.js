@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(1,5,2005)
-		.marker('Launch of Google Maps', 'driver')
+		.marker('Launch of Google Maps', 'driver','.timeline__google-maps')
 		.onActive(function(world){
 
 			//add test route

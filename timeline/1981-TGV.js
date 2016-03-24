@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(1,1,1981)
-		.marker('TGV', 'rail')
+		.marker('TGV', 'rail','.timeline__tgv')
 		.onActive(function(world){
 
 			//add test route

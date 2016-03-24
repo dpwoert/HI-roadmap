@@ -178,6 +178,16 @@ html, body{
 	color: #eee;
 }
 
+.timeline__content__graph{
+	width: 100%;
+	height: auto;
+	margin-top: 16px;
+}
+
+.timeline__end{
+	margin-top: -37px;
+}
+
 .cite{
 	color: #585858;
 }

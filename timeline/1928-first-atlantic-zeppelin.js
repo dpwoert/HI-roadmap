@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(18,9,1928)
-		.marker('First transatlantic zeppelin flight', 'aviation')
+		.marker('First transatlantic zeppelin flight', 'aviation', '.timeline__first-atlantic-zeppelin')
 		.onActive(function(world){
 
 			//add test route

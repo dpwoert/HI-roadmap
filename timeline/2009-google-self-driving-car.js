@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(1,3,2010)
-		.marker('Google starts self driving car programme', 'cars')
+		.marker('Google starts self driving car programme', 'cars', '.timeline__google-self-driving-car')
 		.onActive(function(world){
 
 			//add test route

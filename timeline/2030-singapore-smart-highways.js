@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(1,6,2030)
-		.marker('Smart charging highways', 'cars')
+		.marker('Smart charging highways', 'cars', '.timeline__singapore-smart-highways')
 		.onActive(function(world){
 
 			//add test route

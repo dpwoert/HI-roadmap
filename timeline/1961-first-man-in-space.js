@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(12,4,1961)
-		.marker('First man in space', 'space')
+		.marker('First man in space', 'space', '.timeline__first-man-in-space')
 		.onActive(function(world){
 
 			//add test route

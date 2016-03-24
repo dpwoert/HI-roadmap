@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(1,6,2008)
-		.marker('Tesla Roadstar', 'driver')
+		.marker('Tesla Roadstar', 'driver', '.timeline__tesla')
 		.onActive(function(world){
 
 			//add test route

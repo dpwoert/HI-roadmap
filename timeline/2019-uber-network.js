@@ -29,7 +29,7 @@
 
 	evt
 		.setDate(1,8,2019)
-		.marker('Uber start with self driving cars', 'cars')
+		.marker('Uber start with self driving cars', 'cars', '.timeline__uber-network')
 		.onActive(function(world){
 
 			//add test route

@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(25,10,2007)
-		.marker('Airbus A380', 'aviation')
+		.marker('Airbus A380', 'aviation','.timeline__airbus-hubs')
 		.onActive(function(world){
 
 			//add test route

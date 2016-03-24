@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(1,1,1946)
-		.marker('First transatlantic line flight', 'aviation')
+		.marker('First transatlantic line flight', 'aviation', '.timeline__first-atlantic-airline')
 		.onActive(function(world){
 
 			//add test route

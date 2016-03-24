@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(1,1,2028)
-		.marker('First Hyperloop track', 'rail')
+		.marker('First Hyperloop track', 'rail', '.timeline__hyperloop')
 		.onActive(function(world){
 
 			//add test route

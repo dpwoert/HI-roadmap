@@ -31,7 +31,7 @@
 
 	evt
 		.setDate(1,1,2021)
-		.marker('Uber starts connecting hubs', 'driver')
+		.marker('Uber starts connecting hubs', 'driver', '.timeline__global-uber-network')
 		.onActive(function(world){
 
 			//add test route

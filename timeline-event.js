@@ -27,7 +27,7 @@ window.TimelineEvent = function(timeline){
 
 	this.marker = function(name, type, content){
 
-		if(!name){
+		if(!name && !type && !content){
 			return marker;
 		}
 

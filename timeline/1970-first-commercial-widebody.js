@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(1,10,1970)
-		.marker('First commercial widebody plane', 'aviation')
+		.marker('First commercial widebody plane', 'aviation','.timeline__first-commercial-widebody')
 		.onActive(function(world){
 
 			//add test route

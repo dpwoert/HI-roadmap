@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(1,9,2010)
-		.marker('Uber beta starts', 'cars')
+		.marker('Uber beta starts', 'cars','.timeline__uber-beta')
 		.onActive(function(world){
 
 			//add test route

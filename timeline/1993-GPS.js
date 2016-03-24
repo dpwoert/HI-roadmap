@@ -16,7 +16,7 @@
 
 	evt
 		.setDate(1,12,1993)
-		.marker('GPS available for public use', 'driver')
+		.marker('GPS available for public use', 'driver','.timeline__gps')
 		.onActive(function(world){
 
 			for( var x = 1 ; x < 6 ; x++){

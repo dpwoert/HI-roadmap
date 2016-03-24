@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(1,10,1964)
-		.marker('First bullet train', 'rail')
+		.marker('First bullet train', 'rail', '.timeline__bullet-trains')
 		.onActive(function(world){
 
 			//add test route

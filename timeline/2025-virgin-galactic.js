@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(1,1,2025)
-		.marker('First commercial trip to space', 'space')
+		.marker('First commercial trip to space', 'space', '.timeline__virgin-galactic')
 		.onActive(function(world){
 
 			//add test route

@@ -74,7 +74,7 @@ window.Heatmap = function(world){
 				material.opacity = 0.3;
 
 			}
-			else if(now > 1973 && now < 1974){
+			else if(now >= 1973 && now < 1974){
 
 				geometry.faces.forEach(function(face, i){
 					var oil = faces[i].oil;
@@ -82,6 +82,17 @@ window.Heatmap = function(world){
 					// war = Math.random() > 0.5;
 					var color = oil ? window.colors.driver : window.colors.empty;
 					color = oil2 ? window.colors.rail : color;
+					geometry.faces[i].color.copy(color);
+				});
+
+				material.opacity = 0.3;
+
+			}
+			else if(now >= 2003 && now < 2004){
+
+				geometry.faces.forEach(function(face, i){
+					var oil = faces[i].oil3;
+					var color = oil ? window.colors.driver : window.colors.empty;
 					geometry.faces[i].color.copy(color);
 				});
 

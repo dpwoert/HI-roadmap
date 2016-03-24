@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(1,1,1924)
-		.marker('Imperial Airways founded', 'aviation')
+		.marker('Imperial Airways founded', 'aviation','.timeline__start-imperial-airways')
 		.onActive(function(world){
 
 			route = new Route(timeline.world());

@@ -5,7 +5,7 @@
 
 	evt
 		.setDate(1,1,2004)
-		.marker('First success of hybrid car', 'cars')
+		.marker('First success of hybrid car', 'cars','.timeline__hybrid-card')
 		.onActive(function(world){
 
 			//add test route
