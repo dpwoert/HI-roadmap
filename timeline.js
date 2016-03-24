@@ -369,7 +369,7 @@ window.Timeline = function(world){
 
 			if(event.keyCode === 80){
 				var start = +Date.now();
-				var end = start + (1000 * 60) * 9;
+				var end = start + (1000 * 60) * 11;
 				playRange = d3.scale.linear().domain([ start, end ]).range([0,13000]);
 				play = true;
 
