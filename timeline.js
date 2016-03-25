@@ -137,7 +137,7 @@ window.Timeline = function(world){
 	this.setDate = function(date){
 
 		if(this._now && this._now[2] === date[2]){
-			return false;
+			//return false;
 		}
 
 		var oldDate = now.length === 0 ? date : now;

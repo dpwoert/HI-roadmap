@@ -41,7 +41,6 @@
 				points.forEach(function(point){
 
 					var cityName = cities.indexOf(point.city) > -1 ? point.city : undefined;
-					debugger
 
 					route
 						.addPoint(point.latitude, point.longitude, cityName);
