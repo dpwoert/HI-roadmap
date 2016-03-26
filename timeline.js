@@ -3,9 +3,9 @@ window.Timeline = function(world){
 	var list = [];
 	var bounds = {min: undefined, max: undefined};
 	// var pxBounds = [100, 4000];
-	var pxBounds = [120, 15000];
+	var pxBounds = [120, 5000];
 	var now = [];
-	var scale;
+	var scale, scaleScroll;
 	var group;
 	var tweenable = new Tweenable();
 	var mode = 0;
@@ -84,6 +84,39 @@ window.Timeline = function(world){
 		})
 
 		scale = d3.scale.linear().domain(extent).range(pxBounds);
+
+	};
+
+	var resetPositions = function(){
+
+		var points = document.querySelectorAll('.timeline__point');
+		for (var i = 0; i < points.length; i++) {
+			points[i].removeAttribute('cy');
+		}
+	};
+
+	var updatePositions = function(){
+
+		list.forEach(function(evt, i){
+
+			//get box
+			var top = getPosition(evt, i);
+			var middle = top + 20;
+			var bottom = middle;
+
+			//content
+			var content = evt.marker().content;
+			if(content && mode === 0){
+				content = document.querySelector(content);
+				content.style.top = getPosition(evt, i) + 'px';
+				bottom += content.offsetHeight;
+
+				content.classList.add('timeline__content--' + evt.marker().type);
+			}
+
+			evt.scrollBox = [top, middle, bottom];
+
+		});
 
 	};
 
@@ -168,16 +201,19 @@ window.Timeline = function(world){
 
 		});
 
-		this.now = now[2] + (now[1] * 30 + now[0]) / 356;
+		this.now = now[2] + ((now[1] - 1) * 30 + now[0]) / 356;
 		this._now = now;
 
 	};
 
 	this.switchMode = function(_mode){
+
 		mode = _mode;
+		resetPositions();
 
 		if(mode === 0){
 			document.querySelector('.timeline__content__wrapper').style.opacity = 1;
+			document.querySelector('.timeline__content__wrapper').style.display = 'block';
 
 			world.heatmap.show(false);
 
@@ -185,12 +221,23 @@ window.Timeline = function(world){
 		else{
 			document.querySelector('.timeline__content__wrapper').style.opacity = 0;
 
-			d3
-				.select('.timeline__baseline')
-				.attr('y2', pxBounds[1])
+			window.setTimeout(function(){
+				document.querySelector('.timeline__content__wrapper').style.display = 'none';
+			}, 700);
 
 			world.heatmap.show(true);
 		}
+
+		var height = getPosition(list[list.length-1],list.length - 1);
+		document.querySelector('.timeline').style.height = height + window.innerHeight - pxBounds[0] - 4;
+
+		//line
+		group
+			.selectAll('.timeline__baseline')
+			.transition()
+			.duration(200)
+			.attr('y2', height);
+
 
 		//marker
 		group
@@ -218,6 +265,9 @@ window.Timeline = function(world){
 			.attr('y', function(d, i){
 				return getPosition(d,i);
 			});
+
+		updatePositions();
+
 	};
 
 	this.build = function(){
@@ -309,25 +359,7 @@ window.Timeline = function(world){
 			});
 
 		//add markers
-		list.forEach(function(evt, i){
-
-			//get box
-			var top = getPosition(evt, i);
-			var bottom = top + 20;
-
-			//content
-			var content = evt.marker().content;
-			if(content){
-				content = document.querySelector(content);
-				content.style.top = getPosition(evt, i) + 'px';
-				bottom += content.offsetHeight;
-
-				content.classList.add('timeline__content--' + evt.marker().type);
-			}
-
-			evt.scrollBox = [top, bottom];
-
-		});
+		updatePositions();
 
 		//set to first marker
 		this.setMarker(list[0]);
@@ -343,18 +375,17 @@ window.Timeline = function(world){
 
 				var scrollPos = event.target.scrollTop + pxBounds[0];
 
-				if(mode === 0){
-
-					list.forEach(function(evt){
-
-						if(scrollPos > evt.scrollBox[0] && scrollPos < evt.scrollBox[1]){
-							self.setMarker(evt);
-						}
-
-					});
-
+				if(mode === 1){
+					this.now = scale.invert(scrollPos);
 				}
 
+				list.forEach(function(evt){
+
+					if(scrollPos > evt.scrollBox[0] && scrollPos < evt.scrollBox[1]){
+						self.setMarker(evt);
+					}
+
+				});
 
 				if(scrollPos > 100){
 					message.style.opacity = 0;
