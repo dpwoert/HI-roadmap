@@ -28,6 +28,8 @@ window.World = function(){
 	this.renderManager = new THREE.renderPipeline(renderer);
 	var renderPass = new THREE.RenderStep(width, height, this.scene, this.camera);
 	var copy = new THREE.ShaderStep(width, height);
+	var TiltVert = new THREE.ShaderStep(width, height);
+	var TiltHori = new THREE.ShaderStep(width, height);
 
 	//copypass
 	copy
@@ -35,6 +37,25 @@ window.World = function(){
 		.shader('fragment', document.getElementById('copyFragment').textContent )
 		.pipe()
 		.renderToScreen();
+
+	//tilt shift
+	var pos = 0.5;
+	var blur = 5;
+	TiltVert
+		.setting('v', 'f', blur / width)
+		.setting('r', 'f', pos)
+		.setting('spread', 'f', 1.9)
+		.shader('vertex', document.getElementById('copyVertex').textContent)
+		.shader('fragment', document.getElementById('tiltVertiFragment').textContent)
+		.pipe();
+
+	TiltHori
+		.setting('h', 'f', blur / width)
+		.setting('r', 'f', pos)
+		.setting('spread', 'f', 1.9)
+		.shader('vertex', document.getElementById('copyVertex').textContent)
+		.shader('fragment', document.getElementById('tiltHoriFragment').textContent)
+		.pipe()
 
 	//create globe
 	var cells = 6;
@@ -102,17 +123,17 @@ window.World = function(){
 	// make pipeline
 	this.renderManager
 
-		// .pipe('main', renderPass)
-		// .pipe('toScreen', copy)
+		.pipe('main', renderPass)
+		.pipe('tilt-h', TiltHori)
+		.pipe('tilt-v', TiltVert)
+		.pipe('toScreen', copy)
 
-		.pipe('render', function(){
-			renderer.render(this.scene, this.camera);
-		}.bind(this))
+		// .pipe('render', function(){
+		// 	renderer.render(this.scene, this.camera);
+		// }.bind(this))
+
 		.pipe('controls', controls.update.bind(controls))
 		.pipe('timeline', timeline.tick.bind(timeline))
 		.start();
-
-	// window.scene = scene;
-	// window.camera = camera;
 
 };

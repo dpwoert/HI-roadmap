@@ -343,13 +343,18 @@ window.Timeline = function(world){
 
 				var scrollPos = event.target.scrollTop + 100;
 
-				list.forEach(function(evt){
+				if(mode === 0){
 
-					if(scrollPos > evt.scrollBox[0] && scrollPos < evt.scrollBox[1]){
-						self.setMarker(evt);
-					}
+					list.forEach(function(evt){
 
-				});
+						if(scrollPos > evt.scrollBox[0] && scrollPos < evt.scrollBox[1]){
+							self.setMarker(evt);
+						}
+
+					});
+
+				}
+
 
 				if(scrollPos > 100){
 					message.style.opacity = 0;
