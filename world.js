@@ -6,7 +6,7 @@ window.World = function(){
 	var height = window.innerHeight * dpr;
 
 	var renderer = new THREE.WebGLRenderer({ antialias: true });
-	renderer.setClearColor( 0xf5f5f5, 1 );
+	renderer.setClearColor( 0xffffff, 1 );
 	renderer.setSize(width, height);
 
 	//add DOM element
@@ -15,7 +15,7 @@ window.World = function(){
 	//setup scene
 	this.scene = new THREE.Scene();
 	this.camera = new THREE.PerspectiveCamera( 30, width / height, 1, 1000 );
-	this.camera.position.set(0,0,-50);
+	this.camera.position.set(0,0,-37.5);
 	this.camera.lookAt(new THREE.Vector3(0,0,0));
 
 	//rotated group
@@ -30,6 +30,7 @@ window.World = function(){
 	var copy = new THREE.ShaderStep(width, height);
 	var TiltVert = new THREE.ShaderStep(width, height);
 	var TiltHori = new THREE.ShaderStep(width, height);
+	var FXAA = new THREE.ShaderStep(width, height);
 
 	//copypass
 	copy
@@ -39,7 +40,7 @@ window.World = function(){
 		.renderToScreen();
 
 	//tilt shift
-	var pos = 0.5;
+	var pos = 0.65;
 	var blur = 5;
 	TiltVert
 		.setting('v', 'f', blur / width)

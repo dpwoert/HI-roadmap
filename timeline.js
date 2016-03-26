@@ -3,7 +3,7 @@ window.Timeline = function(world){
 	var list = [];
 	var bounds = {min: undefined, max: undefined};
 	// var pxBounds = [100, 4000];
-	var pxBounds = [100, 15000];
+	var pxBounds = [120, 15000];
 	var now = [];
 	var scale;
 	var group;
@@ -247,7 +247,7 @@ window.Timeline = function(world){
 			.attr('class', 'timeline__baseline')
 			.attr('x1', left)
 			.attr('x2', left)
-			.attr('y1', 100)
+			.attr('y1', 82)
 			// .attr('y2', pxBounds[1])
 			.attr('y2', 11190)
 			.attr('stroke', '#777')
@@ -341,7 +341,7 @@ window.Timeline = function(world){
 			.querySelector('.timeline__wrapper')
 			.addEventListener('scroll', function(event){
 
-				var scrollPos = event.target.scrollTop + 100;
+				var scrollPos = event.target.scrollTop + pxBounds[0];
 
 				if(mode === 0){
 
