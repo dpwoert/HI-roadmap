@@ -7,14 +7,22 @@ window.Heatmap = function(world){
 		return from + (delta*progress);
 	};
 
+	var colorScale = d3.scale
+		.linear()
+		.domain([      0,      24,    10*24,    20*24,    30*24,    40*24])
+		.range([0x00ff00, 0xff000, 0x0000ff, 0x00ff00, 0x00ffff, 0xffff00])
+
 	var getColor = function(input){
 
-		if(input >= 1200){ return new THREE.Color(0.64, 0.44, 0.18); }
-		if(input >= 960){ return new THREE.Color(0, 1, 0); }
-		if(input >= 720){ return new THREE.Color(0, 0, 1); }
-		if(input >= 480){ return new THREE.Color(1.0, 0.04, 0.99); }
-		if(input < 480){ return new THREE.Color(1.0, 0.99, 0.0); }
-		else { return new THREE.Color(1,1,1); }
+		// if(input >= 1200){ return new THREE.Color(0.64, 0.44, 0.18); }
+		// if(input >= 960){ return new THREE.Color(0, 1, 0); }
+		// if(input >= 720){ return new THREE.Color(0, 0, 1); }
+		// if(input >= 480){ return new THREE.Color(1.0, 0.04, 0.99); }
+		// if(input < 480){ return new THREE.Color(1.0, 0.99, 0.0); }
+		// else { return new THREE.Color(1,1,1); }
+
+		var color = colorScale(input);
+		return new THREE.Color(color);
 
 	};
 
@@ -109,6 +117,7 @@ window.Heatmap = function(world){
 
 				geometry.faces.forEach(function(face, i){
 					var value = lerp( faces[i].travelTime['1881'], faces[i].travelTime['2016'], nowRelative );
+					// var value = faces[i].travelTime['1881'];
 					geometry.faces[i].color.copy(getColor(value));
 				});
 

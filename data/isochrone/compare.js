@@ -38,6 +38,43 @@ var getShapeColor = function(color){
 
 };
 
+var openGeoJSON = function(evt){
+
+	var reader = new FileReader();
+	var file = evt.target.files[0];
+
+	reader.onload = function(){
+
+		var geo = JSON.parse(reader.result);
+		var layers = L.geoJson(geo, {
+			style: function(feature) {
+				return {color: getShapeColor(feature.properties.color)};
+			}
+		});
+
+		layers.eachLayer(function(layer){
+			layer.addTo(drawnItems);
+		});
+	};
+
+	// Read in the image file as a data URL.
+	reader.readAsText(file);
+
+};
+
+options.loadFile = function(){
+
+	var picker = document.querySelector('#filepicker');
+	picker.style.display = 'block';
+
+	picker.click();
+	picker.addEventListener('change', openGeoJSON, false);
+
+	// picker.style.display = 'none';
+
+};
+
+
 options.load = function(){
 
 	if(image){
@@ -144,6 +181,7 @@ var start = function(){
 
 	f0.add(options, 'map', ['1881', '1906','1914','1920','2016']).name('year');
 	f0.add(options, 'load').name('change map')
+	f0.add(options, 'loadFile').name('load map')
 	f0.add(options, 'save').name('save map')
 
 	f1.add(options, 'value', options.legends).name('value');
