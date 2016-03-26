@@ -65,6 +65,12 @@ html, body{
 
 .timeline__content__wrapper{
 	transition: 0.25s ease opacity;
+
+	position: absolute;
+	top: 120px;
+	left: 0;
+	right: 0;
+	bottom: 0;
 }
 
 .timeline__scroll-down{
@@ -153,8 +159,8 @@ html, body{
 }
 
 .timeline__content{
-	position: absolute;
-	left: 65px;
+	position: relative;
+	margin-left: 65px;
 	width: 285px;
 	height: auto;
 	padding: 32px;

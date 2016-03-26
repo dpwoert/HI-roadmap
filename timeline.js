@@ -39,18 +39,8 @@ window.Timeline = function(world){
 				return pxBounds[0];
 			} else {
 
-				var prevEvt = list[i-1];
-				var prevBullit = document.querySelectorAll('.timeline__point')[i-1];
-				var prevEl = document.querySelector(prevEvt.marker().content);
-
-				var top = parseInt(prevBullit.getAttribute('cy'));
-				top += 60;
-
-				if(prevEl){
-					top += prevEl.offsetHeight;
-				}
-
-				return top;
+				var el = document.querySelector(evt.marker().content);
+				return el.getBoundingClientRect().top + document.body.scrollTop;
 			}
 
 		} else {
@@ -108,7 +98,7 @@ window.Timeline = function(world){
 			var content = evt.marker().content;
 			if(content && mode === 0){
 				content = document.querySelector(content);
-				content.style.top = getPosition(evt, i) + 'px';
+				// content.style.top = getPosition(evt, i) + 'px';
 				bottom += content.offsetHeight;
 
 				content.classList.add('timeline__content--' + evt.marker().type);
