@@ -26,7 +26,7 @@
 					var lon = rangeLat(y);
 					var point = tools.degreeToVec3(lat, lon, 6, world.radius);
 
-					var geometry = new THREE.SphereGeometry( 0.1, 12, 12 );
+					var geometry = new THREE.SphereGeometry( 0.2, 12, 12 );
 					var mesh = new THREE.Mesh( geometry, material );
 
 					//set position
