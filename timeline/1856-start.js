@@ -8,4 +8,4 @@
 		.onActive(function(world){ })
 		.onLeave(function(){ });
 
-}())
+}());

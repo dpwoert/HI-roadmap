@@ -3,3 +3,4 @@ bower_components
 data/heights/*.hgt
 node_modules
 dist
+.publish

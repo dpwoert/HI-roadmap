@@ -45,7 +45,7 @@
 
 		return sprite;
 
-	}
+	};
 
 	var materials = {};
 	for(var type in window.colors) {
@@ -142,7 +142,7 @@
 			//chainable
 			return this;
 
-		}
+		};
 
 		this.build = function(type, quality){
 
@@ -216,4 +216,4 @@
 
 	};
 
-}())
+}());

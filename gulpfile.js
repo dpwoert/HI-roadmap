@@ -14,9 +14,9 @@ gulp.task('build', function(){
 		.pipe(gulpif('*.js', uglify()))
 		.pipe(gulp.dest('./dist/'));
 
-	//css
+	//css, svg
 	gulp
-		.src([ '*.css' ])
+		.src([ '*.css', '*.svg' ])
 		.pipe(print())
 		.pipe(gulp.dest('./dist/'));
 
@@ -31,7 +31,8 @@ gulp.task('build', function(){
 
 gulp.task('gh-pages', function(){
 
-	return gulp.src('./dist/**/*')
+	return gulp
+		.src('./dist/**/*')
 		.pipe(ghPages());
 
 });

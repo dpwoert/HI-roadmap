@@ -13,4 +13,4 @@
 		.onLeave(function(){
 		});
 
-}())
+}());

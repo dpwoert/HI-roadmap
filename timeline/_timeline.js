@@ -1,2 +1,6 @@
-//create timeline
-window.timeline = new Timeline();
+(function(){
+
+	//create timeline
+	window.timeline = new Timeline();
+
+}());
