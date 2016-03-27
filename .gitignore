@@ -2,3 +2,4 @@ bower_components
 .DS_STORE
 data/heights/*.hgt
 node_modules
+dist

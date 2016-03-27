@@ -8,9 +8,13 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "node-hgt": "^1.2.0",
+  "devDependencies": {
     "turf": "^2.0.2",
-    "dank-csv": "^1.0.0"
+	"gulp": "3.9.0",
+	"gulp-flatten": "0.2.0",
+	"gulp-uglify": "1.5.1",
+	"gulp-print": "2.0.1",
+	"gulp-useref": "*",
+	"gulp-if": "*"
   }
 }
