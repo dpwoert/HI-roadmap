@@ -7,10 +7,12 @@ window.Heatmap = function(world){
 		return from + (delta*progress);
 	};
 
-	var colorScale = d3.scale
-		.linear()
-		.domain([      0,      24,    10*24,    20*24,    30*24,    40*24])
-		.range([0x00ff00, 0xff000, 0x0000ff, 0x00ff00, 0x00ffff, 0xffff00])
+	var colorScales = {
+		day: d3.scale.linear().domain([0, 24]).range(['#14d62e','#61b680']),
+		ten: d3.scale.linear().domain([24, 24 * 10]).range(['#ff0000','#e87a7a']),
+		twenty: d3.scale.linear().domain([24 * 10, 24 * 30]).range(['#f7b7e3','#f904e0']),
+		big: d3.scale.linear().domain([24 * 30, 24 * 50]).range(['#06d2ff','#81b8d2'])
+	};
 
 	var getColor = function(input){
 
@@ -21,7 +23,25 @@ window.Heatmap = function(world){
 		// if(input < 480){ return new THREE.Color(1.0, 0.99, 0.0); }
 		// else { return new THREE.Color(1,1,1); }
 
-		var color = colorScale(input);
+		var color;
+
+		//day range
+		if(input < 24){
+			color = colorScales.day(input);
+		}
+		//1-10 day range
+		else if(input > 24 && input <= 10 * 24){
+			color = colorScales.ten(input);
+		}
+		//10-30 day range
+		else if(input > 10 * 24 && input <= 30 * 24){
+			color = colorScales.twenty(input);
+		}
+		//long range
+		else if(input > 24 * 30){
+			color = colorScales.big(input);
+		}
+
 		return new THREE.Color(color);
 
 	};
@@ -51,6 +71,9 @@ window.Heatmap = function(world){
 		world.scene.add(mesh);
 
 		var yearRange = d3.scale.linear().domain([1881, 2016]).range([0,1]);
+
+		var j = 0;
+		var steps = 5;
 
 		world.renderManager.pipe('heatmap', function(){
 
@@ -115,11 +138,17 @@ window.Heatmap = function(world){
 					return false;
 				}
 
-				geometry.faces.forEach(function(face, i){
+				for( var i = j ; i < geometry.faces.length ; i+=steps ){
+
+					var face = geometry.faces[i];
 					var value = lerp( faces[i].travelTime['1881'], faces[i].travelTime['2016'], nowRelative );
 					// var value = faces[i].travelTime['1881'];
 					geometry.faces[i].color.copy(getColor(value));
-				});
+
+				}
+
+				j++;
+				j = j > steps ? 0 : j;
 
 			}
 

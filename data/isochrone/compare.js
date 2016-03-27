@@ -53,6 +53,8 @@ var openGeoJSON = function(evt){
 		});
 
 		layers.eachLayer(function(layer){
+			// layer.color = layer.feature.properties.color;
+			layer.travelTime = layer.feature.properties.color;
 			layer.addTo(drawnItems);
 		});
 	};
@@ -97,9 +99,10 @@ options.load = function(){
 
 		case '2016':
 
-			var imageBounds = [[90,-180], [-90,180]];
+			var imageBounds = [[78.75,-180], [-60,180]];
 			var url = '../../data/maps/world-map-isochronic-2016-v2.jpg';
 			image = L.imageOverlay(url, imageBounds).addTo(background);
+			// image.setOpacity(0.4);
 
 			options.legends = ['choose', 'dark-red', 'red', 'light-red', 'yellow', 'green', 'dark-blue', 'blue'];
 			options.legendValues = [0, 12, 18, 24, 36, 48];
@@ -112,6 +115,7 @@ options.load = function(){
 		f1.__controllers[i].updateDisplay();
 		if(f1.__controllers[i].property === 'value'){
 			f1.__controllers[i].remove();
+			delete f1.__controllers[i];
 		}
 
 	}
@@ -144,6 +148,16 @@ var start = function(){
 	map = L
 			.map(mapEl)
 			.setView([20,0], 3);
+
+	//add tile layer
+	var scale = window.devicePixelRatio > 1 ? '@2x' : '';
+	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}'+scale+'.png?access_token={accessToken}', {
+			attribution: '',
+			id: 'dpwoert.map-7fihcchk',
+			accessToken: 'pk.eyJ1IjoiZHB3b2VydCIsImEiOiJOSF9GWUZvIn0.Y7PPbCkmFpSCAj7ew_ppwQ',
+			zoomControl: false,
+			// detectRetina: true
+		}).addTo(map);
 
 	// Initialise the FeatureGroup to store editable layers
 	background = new L.FeatureGroup();
