@@ -33,6 +33,13 @@ var getShapeColor = function(color){
 		case 'pink': return '#e90fb1';
 		case 'yellow': return '#dfdd2f';
 		case 'blue': return 'rgb(16, 106, 180)';
+
+		case 'dark-red': return '#a2111e';
+		case 'red': return '#fb494e';
+		case 'light-red': return '#f09999';
+		case 'dark-blue': return '#1a17ad';
+		case 'light-blue': return '#0997fe';
+
 		default: return '#ffffff';
 	}
 
