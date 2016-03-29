@@ -2,4 +2,4 @@ var start = function(){
 	new World();
 };
 
-document.addEventListener("DOMContentLoaded", start);
+document.addEventListener('DOMContentLoaded', start);
