@@ -206,3 +206,34 @@ html, body{
 	color: #D2D2D2;
 	text-decoration: none;
 }
+
+.legend{
+	position: absolute;
+	left: 366px;
+	bottom: 16px;
+	right: 16px;
+	height: 32px;
+
+	background-image: url('legend.svg');
+	background-size: contain;
+	background-position: center center;
+	background-repeat: no-repeat;
+
+	-webkit-transform: translateY(48px);
+	-moz-transform: translateY(48px);
+	transform: translateY(48px);
+
+	-webkit-transition: -webkit-transform 0.3s ease, opacity 0.3s ease;
+	-moz-transition: -moz-transform 0.3s ease, opacity 0.3s ease;
+	transition: transform 0.3s ease, opacity 0.3s ease;
+
+	opacity: 0;
+}
+
+.legend.show{
+	-webkit-transform: translateY(0);
+	-moz-transform: translateY(0);
+	transform: translateY(0);
+
+	opacity: 1;
+}
