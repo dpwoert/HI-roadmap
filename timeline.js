@@ -202,12 +202,15 @@
 
 			mode = _mode;
 			resetPositions();
+			var legend = document.querySelector('.legend');
 
 			if(mode === 0){
 				document.querySelector('.timeline__content__wrapper').style.opacity = 1;
 				document.querySelector('.timeline__content__wrapper').style.display = 'block';
 
 				world.heatmap.show(false);
+
+				legend.classList.remove('show');
 
 			}
 			else{
@@ -217,6 +220,7 @@
 					document.querySelector('.timeline__content__wrapper').style.display = 'none';
 				}, 700);
 
+				legend.classList.add('show');
 				world.heatmap.show(true);
 			}
 
@@ -390,7 +394,7 @@
 			document
 				.querySelector('.timeline__switch')
 				.addEventListener('click', function(event){
-					self.switchMode(mode === 0 ? 1 : 0)
+					self.switchMode(mode === 0 ? 1 : 0);
 				});
 
 			window.addEventListener('keydown', function(event){

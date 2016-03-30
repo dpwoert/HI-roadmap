@@ -10,41 +10,55 @@
 		};
 
 		var colorScales = {
-			day: d3.scale.linear().domain([0, 24]).range(['#14d62e','#61b680']),
-			ten: d3.scale.linear().domain([24, 24 * 10]).range(['#ff0000','#e87a7a']),
-			twenty: d3.scale.linear().domain([24 * 10, 24 * 30]).range(['#f7b7e3','#f904e0']),
-			big: d3.scale.linear().domain([24 * 30, 24 * 50]).range(['#06d2ff','#81b8d2'])
+			halfday: d3.scale.linear().domain([0, 12]).range(['#80e557','#54d126']),
+			day: d3.scale.linear().domain([12, 24]).range(['#56e2a2','#28ce86']),
+			twodays: d3.scale.linear().domain([24, 48]).range(['#4ee5e5','#29c8cc']),
+			week: d3.scale.linear().domain([48, 7*24]).range(['#57afe5','#2b87cc']),
+			twoweeks: d3.scale.linear().domain([7*24,14*24]).range(['#566be8','#2e3dcc']),
+			thirtydays: d3.scale.linear().domain([14*24,30*24]).range(['#c652e2','#ae2fcc']),
+			fourtydays: d3.scale.linear().domain([30*24,40*24]).range(['#e856c3','#cc329d']),
+			big: d3.scale.linear().domain([40*24,50*24]).range(['#e56161','#cc3333']),
 		};
 
 		var getColor = function(input){
 
-			// if(input >= 1200){ return new THREE.Color(0.64, 0.44, 0.18); }
-			// if(input >= 960){ return new THREE.Color(0, 1, 0); }
-			// if(input >= 720){ return new THREE.Color(0, 0, 1); }
-			// if(input >= 480){ return new THREE.Color(1.0, 0.04, 0.99); }
-			// if(input < 480){ return new THREE.Color(1.0, 0.99, 0.0); }
-			// else { return new THREE.Color(1,1,1); }
-
 			var color;
 
-			//day range
-			if(input < 24){
-				color = colorScales.day(input);
+			if(input < 12){
+				// color = colorScales.halfday(input);
+				return new THREE.Color(0x54d126);
 			}
-			//1-10 day range
-			else if(input > 24 && input <= 10 * 24){
-				color = colorScales.ten(input);
+			else if(input > 12 && input <= 24){
+				// color = colorScales.day(input);
+				return new THREE.Color(0x28ce86);
 			}
-			//10-30 day range
-			else if(input > 10 * 24 && input <= 30 * 24){
-				color = colorScales.twenty(input);
+			else if(input > 24 && input <= 48){
+				// color = colorScales.twodays(input);
+				return new THREE.Color(0x29c8cc);
+			}
+			else if(input > 48 && input <= 24*7){
+				// color = colorScales.week(input);
+				return new THREE.Color(0x2b87cc);
+			}
+			else if(input > 24*7 && input <= 24*14){
+				// color = colorScales.twoweeks(input);
+				return new THREE.Color(0x2e3dcc);
+			}
+			else if(input > 24*14 && input <= 24*30){
+				// color = colorScales.thirtydays(input);
+				return new THREE.Color(0xae2fcc);
+			}
+			else if(input > 24*30 && input <= 24*40){
+				// color = colorScales.fourtydays(input);
+				return new THREE.Color(0xcc329d);
 			}
 			//long range
-			else if(input > 24 * 30){
-				color = colorScales.big(input);
+			else {
+				// color = colorScales.big(input);
+				return new THREE.Color(0xcc3333);
 			}
 
-			return new THREE.Color(color);
+			// return new THREE.Color(color);
 
 		};
 
@@ -144,6 +158,9 @@
 
 						var face = geometry.faces[i];
 						var value = lerp( faces[i].travelTime['1881'], faces[i].travelTime['2016'], nowRelative );
+						if(isNaN(value)){
+							debugger
+						}
 						// var value = faces[i].travelTime['1881'];
 						geometry.faces[i].color.copy(getColor(value));
 

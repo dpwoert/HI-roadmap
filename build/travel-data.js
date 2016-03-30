@@ -49,6 +49,11 @@ var retrieve = function(year){
 				point.travelTime[year] = feature.properties.travelTime;
 			}
 
+			if(!feature.properties.travelTime){
+				console.log(feature.properties)
+				process.exit();
+			}
+
 			//see if this point is closer
 			feature.geometry.coordinates[0].forEach(function(coord){
 

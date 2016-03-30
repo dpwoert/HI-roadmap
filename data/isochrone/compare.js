@@ -112,7 +112,7 @@ options.load = function(){
 			// image.setOpacity(0.4);
 
 			options.legends = ['choose', 'dark-red', 'red', 'light-red', 'yellow', 'green', 'dark-blue', 'blue'];
-			options.legendValues = [0, 12, 18, 24, 36, 48];
+			options.legendValues = [0, 6, 12, 18, 24, 30, 36, 42];
 
 		break;
 
