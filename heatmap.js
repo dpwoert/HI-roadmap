@@ -158,10 +158,6 @@
 
 						var face = geometry.faces[i];
 						var value = lerp( faces[i].travelTime['1881'], faces[i].travelTime['2016'], nowRelative );
-						if(isNaN(value)){
-							debugger
-						}
-						// var value = faces[i].travelTime['1881'];
 						geometry.faces[i].color.copy(getColor(value));
 
 					}

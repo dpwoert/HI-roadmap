@@ -203,6 +203,7 @@
 			mode = _mode;
 			resetPositions();
 			var legend = document.querySelector('.legend');
+			var switchBtn = document.querySelector('.timeline__switch');
 
 			if(mode === 0){
 				document.querySelector('.timeline__content__wrapper').style.opacity = 1;
@@ -211,6 +212,7 @@
 				world.heatmap.show(false);
 
 				legend.classList.remove('show');
+				switchBtn.classList.remove('active');
 
 			}
 			else{
@@ -221,6 +223,8 @@
 				}, 700);
 
 				legend.classList.add('show');
+				switchBtn.classList.add('active');
+
 				world.heatmap.show(true);
 			}
 
