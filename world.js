@@ -137,4 +137,24 @@ window.World = function(){
 		.pipe('timeline', timeline.tick.bind(timeline))
 		.start();
 
+	window.addEventListener('resize', function(){
+
+		dpr = window.devicePixelRatio = 1;
+		width = window.innerWidth - 350 * dpr;
+		height = window.innerHeight * dpr;
+		renderer.setSize(width, height);
+
+		//update camera
+		this.camera.aspect = width / height;
+		this.camera.updateProjectionMatrix();
+
+		//update buffers
+		// renderPass.setSize(width, height);
+		// copy.setSize(width, height);
+		// TiltVert.setSize(width, height);
+		// TiltHori.setSize(width, height);
+		// FXAA.setSize(width, height);
+
+	}.bind(this));
+
 };
