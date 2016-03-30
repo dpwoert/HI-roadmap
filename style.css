@@ -257,3 +257,24 @@ html, body{
 
 	opacity: 0.6;
 }
+
+.info-btn{
+	position: absolute;
+	right: 16px;
+	top: 16px;
+	width: 22px;
+	height: 22px;
+	border: 2px solid #ccc;
+	border-radius: 16px;
+
+	background-image: url('info.svg');
+	background-size: 62% 62%;
+	background-repeat: no-repeat;
+	background-position: 48% 48%;
+
+	cursor: pointer;
+}
+
+.info-btn:hover{
+	background-color: rgb(243, 243, 243);
+}
