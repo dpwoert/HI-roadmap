@@ -52,12 +52,12 @@ html, body{
 	width: 22px;
 	height: 22px;
 	border-radius: 16px;
-	z-index: 99;
+	z-index: 1;
 	border: 1px solid #ccc;
 	margin-top: -18px;
 	margin-left: -11px;
 
-	background-image: url(clock.svg);
+	background-image: url(images/clock.svg);
 	background-size: 65% 65%;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -124,7 +124,7 @@ html, body{
 	display: inline-block;
 	width: 10px;
 	height: 10px;
-	background: url(arrow.svg);
+	background: url(images/arrow.svg);
 	background-size: contain;
 	background-repeat: no-repeat;
 	margin-top: 4px;
@@ -234,7 +234,7 @@ html, body{
 	right: 16px;
 	height: 32px;
 
-	background-image: url('legend.svg');
+	background-image: url('images/legend.svg');
 	background-size: contain;
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -266,8 +266,9 @@ html, body{
 	height: 22px;
 	border: 2px solid #ccc;
 	border-radius: 16px;
+	z-index: 4;
 
-	background-image: url('info.svg');
+	background-image: url('images/info.svg');
 	background-size: 62% 62%;
 	background-repeat: no-repeat;
 	background-position: 48% 48%;
@@ -277,4 +278,74 @@ html, body{
 
 .info-btn:hover{
 	background-color: rgb(243, 243, 243);
+}
+.info-btn.close{
+	background-image: url('images/close.svg');
+	background-size: 45% 45%;
+	background-position: 50% 50%;
+}
+
+.info{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+	background: rgba(255, 255, 255, 0.9);
+
+	padding-left: 400px;
+	display: none;
+}
+
+.info__logo{
+	margin-top: 75px;
+	width: 100%;
+	height: 60px;
+	background-image: url('images/logo.svg');
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+.info__logo-hi{
+	position: absolute;
+	width: 125px;
+	height: auto;
+	bottom: 16px;
+	right: 16px;
+}
+
+.info__text{
+	margin-top: 16px;
+	font-family: 'Avenir';
+	font-size: 12px;
+	color: black;
+}
+
+.info__buttons{
+	margin-top: 16px;
+}
+.info__buttons li{
+	float: left;
+	margin-left: 0;
+	margin-right: 8px;
+
+	list-style: none;
+}
+.info__buttons a{
+	text-decoration: none;
+	color: black;
+
+	padding: 4px 6px;
+	border: 2px solid black;
+
+	font-family: 'Avenir';
+	font-size: 13px;
+	font-weight: bold;
+
+	-webkit-transition: 0.2s ease background;
+	-moz-transition: 0.2s ease background;
+	transition: 0.2s ease background;
+}
+.info__buttons a:hover{
+	background: white;
 }

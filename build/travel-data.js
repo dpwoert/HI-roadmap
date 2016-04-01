@@ -44,7 +44,7 @@ var retrieve = function(year){
 			var inside = turf.inside(center, feature);
 
 			//inside
-			if(inside){
+			if(inside && (!point.travelTime[year] || point.travelTime[year] > feature.properties.travelTime)){
 				_inside = true;
 				point.travelTime[year] = feature.properties.travelTime;
 			}
