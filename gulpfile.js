@@ -14,9 +14,9 @@ gulp.task('build', function(){
 		.pipe(gulpif('*.js', uglify()))
 		.pipe(gulp.dest('./dist/'));
 
-	//css, svg
+	//css, svg, CNAME (needed for github)
 	gulp
-		.src([ '*.css', '*.svg', 'images/*.svg' ])
+		.src([ '*.css', '*.svg', 'images/*.svg', 'CNAME' ])
 		.pipe(print())
 		.pipe(gulp.dest('./dist/'));
 
