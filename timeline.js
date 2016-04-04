@@ -334,6 +334,7 @@
 				.attr('fill', '#777')
 				.attr('stroke', 'none')
 				.attr('alignment-baseline', 'central')
+				.attr('dominant-baseline', 'central')
 				.attr('text-anchor', 'middle')
 				.text(function(d){ return d.date[2]; })
 				.on('mousedown', function(d){
@@ -353,6 +354,7 @@
 				// .attr('fill', '#777')
 				.attr('stroke', 'none')
 				.attr('alignment-baseline', 'central')
+				.attr('dominant-baseline', 'central')
 				.text(function(d){ return d.marker().name; })
 				.on('mousedown', function(d){
 					self.setMarker(d);
