@@ -16,7 +16,7 @@ gulp.task('build', function(){
 
 	//css, svg
 	gulp
-		.src([ '*.css', '*.svg' ])
+		.src([ '*.css', '*.svg', 'images/*.svg' ])
 		.pipe(print())
 		.pipe(gulp.dest('./dist/'));
 
