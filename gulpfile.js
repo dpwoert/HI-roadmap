@@ -22,7 +22,7 @@ gulp.task('build', function(){
 
 	//image folder
 	gulp
-		.src([ 'images/*.svg' ])
+		.src([ 'images/*.{svg,jpg}' ])
 		.pipe(print())
 		.pipe(gulp.dest('./dist/images/'));
 
