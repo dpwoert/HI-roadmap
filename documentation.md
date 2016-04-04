@@ -15,4 +15,4 @@ gulp build
 
 ## Map tool
 Create local server (`python -m 'SimpleHTTPServer'`) and go to `localhost/data/isochrone`.  
-[insert image]
+![map tool](https://cloud.githubusercontent.com/assets/3438247/14259778/6179c1c2-faa0-11e5-93a8-793001639bbd.png)
