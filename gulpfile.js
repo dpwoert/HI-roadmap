@@ -16,9 +16,15 @@ gulp.task('build', function(){
 
 	//css, svg, CNAME (needed for github)
 	gulp
-		.src([ '*.css', '*.svg', 'images/*.svg', 'CNAME' ])
+		.src([ '*.css', '*.svg', 'CNAME' ])
 		.pipe(print())
 		.pipe(gulp.dest('./dist/'));
+
+	//image folder
+	gulp
+		.src([ 'images/*.svg' ])
+		.pipe(print())
+		.pipe(gulp.dest('./dist/images/'));
 
 	//data
 	return gulp
