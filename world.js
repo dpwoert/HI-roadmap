@@ -155,6 +155,12 @@ window.World = function(){
 		// TiltHori.setSize(width, height);
 		// FXAA.setSize(width, height);
 
+		//update timeline
+		timeline.resize();
+
 	}.bind(this));
+
+	//safari fix
+	window.setTimeout(timeline.resize, 0);
 
 };

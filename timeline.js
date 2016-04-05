@@ -270,6 +270,11 @@
 
 		};
 
+		this.resize = function(){
+			this.switchMode(mode);
+			console.log('resize');
+		};
+
 		this.build = function(){
 
 			//order on date

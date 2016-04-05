@@ -209,8 +209,8 @@ html, body{
 }
 
 .timeline__content__graph{
-	width: 100%;
-	height: auto;
+	width: 221px;
+	height: 50px;
 	margin-top: 16px;
 }
 
