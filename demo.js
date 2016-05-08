@@ -5,7 +5,7 @@ var start = function(){
 	var timeline = document.querySelector('.timeline__wrapper');
 	var show = false;
 
-	if(webglDetect){
+	if(webglDetect && window.innerWidth > 600){
 		new World();
 	} else {
 
