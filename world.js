@@ -166,7 +166,7 @@ window.World = function(){
 	window.setTimeout(timeline.resize, 0);
 
 	//remove fx on safari
-	if(isSafari){
+	// if(this.isSafari){
 		// this.renderManager
 		// 	.remove('main')
 		// 	.remove('tilt-h')
@@ -175,6 +175,6 @@ window.World = function(){
 		// 		renderer.render(this.scene, this.camera);
 		// 	}.bind(this));
 
-	}
+	// }
 
 };

@@ -1,11 +1,19 @@
 var start = function(){
 
-	new World();
-
-
 	var infoBtn = document.querySelector('.info-btn');
 	var infoModal = document.querySelector('.info');
+	var timeline = document.querySelector('.timeline__wrapper');
 	var show = false;
+
+	if(webglDetect){
+		new World();
+	} else {
+
+		infoModal.classList.add('no-webgl');
+		timeline.style.display = 'none';
+		infoBtn.style.display = 'none';
+
+	}
 
 	//show info window
 	infoBtn.addEventListener('click', function(){
