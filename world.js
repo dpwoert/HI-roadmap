@@ -1,5 +1,7 @@
 window.World = function(){
 
+	this.isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 && navigator.userAgent && !navigator.userAgent.match('CriOS');
+
 	var canvas = document.getElementById('canvas');
 	var dpr = window.devicePixelRatio = 1;
 	var width = canvas.offsetWidth * dpr;
@@ -162,5 +164,17 @@ window.World = function(){
 
 	//safari fix
 	window.setTimeout(timeline.resize, 0);
+
+	//remove fx on safari
+	if(isSafari){
+		// this.renderManager
+		// 	.remove('main')
+		// 	.remove('tilt-h')
+		// 	.remove('tilt-v')
+		// 	.pipe('render', function(){
+		// 		renderer.render(this.scene, this.camera);
+		// 	}.bind(this));
+
+	}
 
 };

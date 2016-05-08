@@ -273,7 +273,7 @@
 		this.resize = function(){
 			this.switchMode(mode);
 			console.log('resize');
-		};
+		}.bind(this);
 
 		this.build = function(){
 

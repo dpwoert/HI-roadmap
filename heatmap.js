@@ -89,13 +89,12 @@
 			var yearRange = d3.scale.linear().domain([1881, 2016]).range([0,1]);
 
 			var j = 0;
-			var steps = 5;
+			var steps = world.isSafari ? 10 : 5;
 
 			world.renderManager.pipe('heatmap', function(){
 
 				var now = timeline.now;
 				var nowRelative = yearRange(now);
-
 
 				if(now > 1914 && now < 1919){
 
