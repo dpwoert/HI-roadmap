@@ -356,6 +356,36 @@ html, body{
 	background: white;
 }
 
+.info__buttons a.info__demo{
+	color: red;
+	border-color: red;
+	display: none;
+}
+
+.info__no-webgl{
+	color: red;
+	margin: 0.5em 0;
+	font-weight: bold;
+}
+
+.info.no-webgl{
+	display: block;
+	max-width: 500px;
+	margin: 0 auto;
+	position: relative;
+	padding-left: 0;
+}
+.info.no-webgl .info__buttons a.info__demo{
+	display: inline;
+}
+.info.no-webgl .info__no-webgl{
+	display: inline-block;
+}
+.info.no-webgl strong,
+.info.no-webgl .legend--bullets{
+	display: none;
+}
+
 .legend--bullets li{
 	list-style: none;
 	line-height: 1.4em;
